@@ -12,3 +12,30 @@ Apresentar um relatório contendo:
 4. Pelo menos dois arquivos com programas fonte escritos na linguagem X+++ contendo todos os recursos léxicos da linguagem (um exemplo sem erros léxicos e outro com alguns erros léxicos)
 5. Os arquivos com os LOGs gerados pelo analisador léxico, referente aos programas de teste em X+++ com a listagem dos tokens reconhecidos pelo programa
  
+## Geração do código
+
+Como gerar os arquivos java:
+
+```bash
+cd introducao-compiladores/parser
+javacc langX+++.jj
+```
+
+Como compilar os arquivos:
+
+```bash
+cd introducao-compiladores
+javac parser/langX.java
+```
+
+Como compilar o codigo usando o compilador gerado:
+
+```bash
+cd  introducao-compiladores
+java parser.langX -short samples/bintree.x >> output.log
+
+```
+
+Isso ai :+1:.
+ 
+ 
