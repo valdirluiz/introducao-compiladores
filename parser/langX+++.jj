@@ -151,7 +151,7 @@ TOKEN :
 | < DO: "do" >
 | < SWITCH: "switch" >
 | < CASE: "case" >
-| < DEFAULT: "default" >
+| < DEFAULT_CASE: "default" >
 }
 
 /* constantes */
@@ -162,6 +162,12 @@ TOKEN :
                   (["0"-"9"] (["0"-"9"])* )
                  ) >
 |
+
+< float_constant:(  // números decimais
+                (["0"-"9"] (["0"-"9"])* "." ["0"-"9"] (["0"-"9"])*)
+               ) >
+|
+
   < string_constant:    // constante string como "abcd bcda"
       "\""( ~["\"","\n","\r"])* "\"" >
 |
