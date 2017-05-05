@@ -181,7 +181,7 @@ TOKEN :
 
 TOKEN :
 {
-  < IDENT: <LETTER> (<LETTER>|<DIGIT>)* >
+  < IDENT: <LETTER> (<LETTER>|<DIGIT> | "_")* >
 |
   < #LETTER:["A"-"Z","a"-"z"] >
 |
@@ -248,6 +248,7 @@ SPECIAL_TOKEN :
   "/",
   "%",
   ":",
+  "_",
   " ",
   "\t",
   "\n",

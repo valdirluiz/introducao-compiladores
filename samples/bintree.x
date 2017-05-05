@@ -16,6 +16,8 @@ double testeFloat4 = 1.2e-4;
 double testeFloat5 = .2E-4;
 double testeFloat6 = .2e-4;
 
+string teste_1_a;
+
 constructor()  // construtor 1, sem par�metros
 {
    ano = 1900; // inicializa em 1/1/1900
