@@ -10,7 +10,7 @@ final static String Version = "X++ Compiler - Version 1.0 - 2004";
 boolean Menosshort = false; // saída resumida = falso
 
 
-// Define o método "main" da classe langX.  
+// Define o método "main" da classe langX.
   public  static void main(String args[]) throws ParseException
   {
     String filename = ""; // nome do arquivo a ser analisado
@@ -32,7 +32,7 @@ boolean Menosshort = false; // saída resumida = falso
     }
 
     if (args[i].equals("-"))
-    {       // lê da entrada padrão      
+    {       // lê da entrada padrão
         System.out.println("Reading from standard input . . .");
         parser = new langX(System.in);
      }
@@ -222,7 +222,7 @@ String s;
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[55];
+    boolean[] la1tokens = new boolean[58];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -239,7 +239,7 @@ String s;
         }
       }
     }
-    for (int i = 0; i < 55; i++) {
+    for (int i = 0; i < 58; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

@@ -1,7 +1,7 @@
 /*************************************************************************
 Arquivo a ser processado pelo programa JavaCC.
 Contém:
-       - descrição do analisador léxico para a linguagem X++ 
+       - descrição do analisador léxico para a linguagem X++
 
 Autor: Marcio Delamaro
 Este programa é parte do livro "Construção de compiladores usando ferra..."
@@ -21,8 +21,8 @@ final static String Version = "X++ Compiler - Version 1.0 - 2004";
 boolean Menosshort = false; // saída resumida = falso
 
 
-// Define o método "main" da classe langX.  
-  public  static void main(String args[]) throws ParseException 
+// Define o método "main" da classe langX.
+  public  static void main(String args[]) throws ParseException
   {
     String filename = ""; // nome do arquivo a ser analisado
     langX parser;     // analisador léxico/sintático
@@ -43,22 +43,22 @@ boolean Menosshort = false; // saída resumida = falso
     }
 
     if (args[i].equals("-"))
-    {       // lê da entrada padrão      
+    {       // lê da entrada padrão
         System.out.println("Reading from standard input . . .");
         parser = new langX(System.in);
      }
-     else 
+     else
     {       // lê do arquivo
-        filename = args[args.length-1];  
+        filename = args[args.length-1];
         System.out.println("Reading from file " + filename + " . . .");
         try {
             parser = new langX(new java.io.FileInputStream(filename));
-        } 
+        }
     catch (java.io.FileNotFoundException e) {
                System.out.println("File " + filename + " not found.");
         return;
         }
-    } 
+    }
     parser.Menosshort = ms;
     parser.program();   // chama o método que faz a análise
     if ( parser.token_source.foundLexError() != 0 ) // verifica se houve erro léxico
@@ -133,7 +133,7 @@ SKIP :
 
 TOKEN :
 {
-  < BREAK: "break" > 
+  < BREAK: "break" >
 | < CLASS: "class" >
 | < CONSTRUCTOR: "constructor" >
 | < ELSE: "else" >
@@ -141,11 +141,14 @@ TOKEN :
 | < FOR: "for" >
 | < IF: "if" >
 | < INT: "int" >
+| < STRING: "string" >
+| < CHAR: "char" >
+| < BOOLEAN: "boolean" >
+| < DOUBLE: "double" >
 | < NEW: "new" >
 | < PRINT: "print" >
 | < READ: "read" >
 | < RETURN: "return" >
-| < STRING: "string" >
 | < SUPER: "super" >
 }
 
@@ -154,7 +157,7 @@ TOKEN :
 TOKEN :
 {
   < int_constant:(  // números decimais, octais, hexadecimais ou binários
-                  (["0"-"9"] (["0"-"9"])* ) | 
+                  (["0"-"9"] (["0"-"9"])* ) |
                   (["0"-"7"] (["0"-"7"])* ["o", "O"] ) |
                   (["0"-"9"] (["0"-"7","A"-"F","a"-"f"])* ["h", "H"] ) |
                   (["0"-"1"] (["0"-"1"])* ["b", "B"])
@@ -213,7 +216,7 @@ TOKEN :
 /* Trata os erros léxicos */
 SPECIAL_TOKEN :
 {
-<INVALID_LEXICAL: 
+<INVALID_LEXICAL:
 (~ ["a"-"z", "A"-"Z",
   "0"-"9",
   "\"",
@@ -242,15 +245,15 @@ SPECIAL_TOKEN :
   "\f"
 ])+>
    {
-    System.err.println("Line " + input_stream.getEndLine() + 
+    System.err.println("Line " + input_stream.getEndLine() +
                            " - Invalid string found: " + image);
     countLexError++;
    }
 |
-   <INVALID_CONST: 
+   <INVALID_CONST:
    "\"" (~ ["\n","\r","\""])* ["\n","\r"]>
    {
-    System.err.println("Line " + input_stream.getEndLine() + 
+    System.err.println("Line " + input_stream.getEndLine() +
                            " - String constant has a \\n: " + image);
     countLexError++;
    }
@@ -270,15 +273,15 @@ Token t;
         st = st.specialToken;
         do {
            if ( Menosshort )
-          System.out.println(st.image + "  " + 
+          System.out.println(st.image + "  " +
                                  im(st.kind) + " " +
                                  st.kind);
            else
-              System.out.println("Line: " + st.beginLine + 
-                                 " Column: " + st.beginColumn + 
+              System.out.println("Line: " + st.beginLine +
+                                 " Column: " + st.beginColumn +
                                  " " + st.image +
                                  "  " + im(st.kind) + "  "+t.kind);
-          st = st.next;       
+          st = st.next;
         } while (st != t.next);
-    } while (t.kind != langXConstants.EOF);  
+    } while (t.kind != langXConstants.EOF);
 }

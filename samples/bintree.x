@@ -1,28 +1,30 @@
 /***********************************************
-Esse programa implementa uma árvore de busca binária
+Esse programa implementa uma ï¿½rvore de busca binï¿½ria
 *************************************************/
 
-class bintree { /* ná da árvore binária */
+class bintree { /* nï¿½ da ï¿½rvore binï¿½ria */
 
 
 class data { // define um classe aninhada do tipo data (dia, mes ano)
 int dia, mes, ano;
+string teste;
+double teste2;
 
-constructor()  // construtor 1, sem parâmetros
+constructor()  // construtor 1, sem parï¿½metros
 {
    ano = 1900; // inicializa em 1/1/1900
    mes = 1;
    dia = 1;
 }
 
-constructor(int d, int m, int a) // construtor 2 - dia mês e ano como
-{                // parâmetros 
+constructor(int d, int m, int a) // construtor 2 - dia mï¿½s e ano como
+{                // parï¿½metros
    dia = d;
    mes = m;
    ano = a;
 }
 
-int compara(data x) // compara duas datas 
+int compara(data x) // compara duas datas
 {             // < 0 - menor > 0 maior 0 igual
    if ( ano < x.ano) return -1;
    if ( ano > x.ano) return 1;
@@ -37,10 +39,10 @@ int compara(data x) // compara duas datas
 } // final classe data
 
 
-// variáveis da classe bintree
+// variï¿½veis da classe bintree
 
-data key;       // chave de comparação
-bintree left,right; // referência para os filhos
+data key;       // chave de comparaï¿½ï¿½o
+bintree left,right; // referï¿½ncia para os filhos
 
 constructor(data x)
 {
@@ -49,7 +51,7 @@ constructor(data x)
    right = null;
 }
 
-int insert(data k) // adiciona um elemento na árvore
+int insert(data k) // adiciona um elemento na ï¿½rvore
 {
 int x;
 
@@ -72,7 +74,7 @@ int x;
 }
 
 
-int treeprint(int x) // imprime a árvore
+int treeprint(int x) // imprime a ï¿½rvore
 {
 int i;
 

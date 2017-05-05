@@ -27,75 +27,81 @@ public interface langXConstants {
   /** RegularExpression Id. */
   int INT = 19;
   /** RegularExpression Id. */
-  int NEW = 20;
+  int STRING = 20;
   /** RegularExpression Id. */
-  int PRINT = 21;
+  int CHAR = 21;
   /** RegularExpression Id. */
-  int READ = 22;
+  int BOOLEAN = 22;
   /** RegularExpression Id. */
-  int RETURN = 23;
+  int DOUBLE = 23;
   /** RegularExpression Id. */
-  int STRING = 24;
+  int NEW = 24;
   /** RegularExpression Id. */
-  int SUPER = 25;
+  int PRINT = 25;
   /** RegularExpression Id. */
-  int int_constant = 26;
+  int READ = 26;
   /** RegularExpression Id. */
-  int string_constant = 27;
+  int RETURN = 27;
   /** RegularExpression Id. */
-  int null_constant = 28;
+  int SUPER = 28;
   /** RegularExpression Id. */
-  int IDENT = 29;
+  int int_constant = 29;
   /** RegularExpression Id. */
-  int LETTER = 30;
+  int string_constant = 30;
   /** RegularExpression Id. */
-  int DIGIT = 31;
+  int null_constant = 31;
   /** RegularExpression Id. */
-  int LPAREN = 32;
+  int IDENT = 32;
   /** RegularExpression Id. */
-  int RPAREN = 33;
+  int LETTER = 33;
   /** RegularExpression Id. */
-  int LBRACE = 34;
+  int DIGIT = 34;
   /** RegularExpression Id. */
-  int RBRACE = 35;
+  int LPAREN = 35;
   /** RegularExpression Id. */
-  int LBRACKET = 36;
+  int RPAREN = 36;
   /** RegularExpression Id. */
-  int RBRACKET = 37;
+  int LBRACE = 37;
   /** RegularExpression Id. */
-  int SEMICOLON = 38;
+  int RBRACE = 38;
   /** RegularExpression Id. */
-  int COMMA = 39;
+  int LBRACKET = 39;
   /** RegularExpression Id. */
-  int DOT = 40;
+  int RBRACKET = 40;
   /** RegularExpression Id. */
-  int ASSIGN = 41;
+  int SEMICOLON = 41;
   /** RegularExpression Id. */
-  int GT = 42;
+  int COMMA = 42;
   /** RegularExpression Id. */
-  int LT = 43;
+  int DOT = 43;
   /** RegularExpression Id. */
-  int EQ = 44;
+  int ASSIGN = 44;
   /** RegularExpression Id. */
-  int LE = 45;
+  int GT = 45;
   /** RegularExpression Id. */
-  int GE = 46;
+  int LT = 46;
   /** RegularExpression Id. */
-  int NEQ = 47;
+  int EQ = 47;
   /** RegularExpression Id. */
-  int PLUS = 48;
+  int LE = 48;
   /** RegularExpression Id. */
-  int MINUS = 49;
+  int GE = 49;
   /** RegularExpression Id. */
-  int STAR = 50;
+  int NEQ = 50;
   /** RegularExpression Id. */
-  int SLASH = 51;
+  int PLUS = 51;
   /** RegularExpression Id. */
-  int REM = 52;
+  int MINUS = 52;
   /** RegularExpression Id. */
-  int INVALID_LEXICAL = 53;
+  int STAR = 53;
   /** RegularExpression Id. */
-  int INVALID_CONST = 54;
+  int SLASH = 54;
+  /** RegularExpression Id. */
+  int REM = 55;
+  /** RegularExpression Id. */
+  int INVALID_LEXICAL = 56;
+  /** RegularExpression Id. */
+  int INVALID_CONST = 57;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -126,11 +132,14 @@ public interface langXConstants {
     "\"for\"",
     "\"if\"",
     "\"int\"",
+    "\"string\"",
+    "\"char\"",
+    "\"boolean\"",
+    "\"double\"",
     "\"new\"",
     "\"print\"",
     "\"read\"",
     "\"return\"",
-    "\"string\"",
     "\"super\"",
     "<int_constant>",
     "<string_constant>",
