@@ -1,10 +1,7 @@
 /*************************************************************************
 Arquivo a ser processado pelo programa JavaCC.
 Contém:
-       - descrição do analisador léxico para a linguagem X++
-
-Autor: Marcio Delamaro
-Este programa é parte do livro "Construção de compiladores usando ferra..."
+       - descrição do analisador léxico para a linguagem X+++
 ************************************************************************/
 options {
   STATIC = false;
@@ -150,13 +147,18 @@ TOKEN :
 | < READ: "read" >
 | < RETURN: "return" >
 | < SUPER: "super" >
+| < WHILE: "while" >
+| < DO: "do" >
+| < SWITCH: "switch" >
+| < CASE: "case" >
+| < DEFAULT: "default" >
 }
 
 /* constantes */
 
 TOKEN :
 {
-  < int_constant:(  // números decimais 
+  < int_constant:(  // números decimais
                   (["0"-"9"] (["0"-"9"])* )
                  ) >
 |
@@ -190,6 +192,7 @@ TOKEN :
 | < SEMICOLON: ";" >
 | < COMMA: "," >
 | < DOT: "." >
+| < TWOPOINTS: ":" >
 }
 
 /* Operadores */
