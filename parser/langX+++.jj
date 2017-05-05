@@ -156,11 +156,8 @@ TOKEN :
 
 TOKEN :
 {
-  < int_constant:(  // números decimais, octais, hexadecimais ou binários
-                  (["0"-"9"] (["0"-"9"])* ) |
-                  (["0"-"7"] (["0"-"7"])* ["o", "O"] ) |
-                  (["0"-"9"] (["0"-"7","A"-"F","a"-"f"])* ["h", "H"] ) |
-                  (["0"-"1"] (["0"-"1"])* ["b", "B"])
+  < int_constant:(  // números decimais 
+                  (["0"-"9"] (["0"-"9"])* )
                  ) >
 |
   < string_constant:    // constante string como "abcd bcda"
