@@ -9,7 +9,12 @@ class data { // define um classe aninhada do tipo data (dia, mes ano)
 int dia, mes, ano;
 string teste;
 double teste2;
-float testeFloat = 1.1;
+double testeFloat1 = 1.1;
+double testeFloat2 = .1;
+double testeFloat3 = 1.2E-4;
+double testeFloat4 = 1.2e-4;
+double testeFloat5 = .2E-4;
+double testeFloat6 = .2e-4;
 
 constructor()  // construtor 1, sem par�metros
 {
