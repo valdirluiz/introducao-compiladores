@@ -55,7 +55,7 @@ class PessoaFisica extends Pessoa {
    }
 
    int metodoComPrint(){
-     print "Elemento ja existe\n";
+     print "Teste\n";
      return 0;
    }
 
@@ -72,6 +72,18 @@ class PessoaFisica extends Pessoa {
        return 0;
      }
 
+   }
+
+   int metodoComSwitch(){
+     int a;
+     switch (a) {
+       case 1 :
+          return a + 1;
+      case 2 :
+         return  a + 2;
+      default:
+         return 0;
+     }
    }
 
    int metodoComAtribuicoesDeTodosOsTipos(){
