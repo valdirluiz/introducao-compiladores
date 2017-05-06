@@ -50,12 +50,10 @@ class PessoaFisica extends Pessoa {
   Endereco endereco_3;
 
 
-   int metodo(){
-     return 0;
-   }
-
-   int metodoComPrint(){
-     print "Teste\n";
+   int metodoComForEPrint(){
+     for (i = 0; i < 10; i = i + 1){
+       print "Teste\n";
+     }
      return 0;
    }
 
