@@ -158,9 +158,7 @@ TOKEN :
 
 TOKEN :
 {
-  < int_constant:(  // números decimais
-                  (["0"-"9"] (["0"-"9"])* )
-                 ) >
+  < int_constant:((["0"-"9"] (["0"-"9"])* )) >
 |
 
 < float_constant:(
@@ -171,10 +169,14 @@ TOKEN :
                ) >
 |
 
-  < string_constant:    // constante string como "abcd bcda"
+  < string_constant:
       "\""( ~["\"","\n","\r"])* "\"" >
 |
-  < null_constant: "null" > // constante null
+  < boolean_constant: ("true" | "false") >
+|
+  < char_constant: "\'" ( ~["\"","\n","\r"]){1} "\'" >
+|
+  < null_constant: "null" > 
 }
 
 /* Identificadores */

@@ -14,6 +14,7 @@ class Pessoa{
     nome = n;
   }
 
+  //tipos primitivos
   int qt_Dependentes;
   string nome;
   Data dtNascimento;
@@ -25,6 +26,28 @@ class Pessoa{
 }
 
 class PessoaFisica extends Pessoa {
+
+  //constantes flat
+  double testeFloat1 = 1.1;
+  double testeFloat2 = .1;
+  double testeFloat3 = 1.2E-4;
+  double testeFloat4 = 1.2e-4;
+  double testeFloat5 = .2E-4;
+  double testeFloat6 = .2e-4;
+
+  //constante inteira
+  int testeInt = 1;
+
+  //constante boolean
+  boolean testeBoolean1 = true;
+  boolean testeBoolean2 = false;
+
+  //constante char
+  char charTeste = 'a';
+  char charTeste2 = 'A';
+
+  //constante null
+  Pessoa nullTeste = null;
 
   class Endereco{
     string rua;
