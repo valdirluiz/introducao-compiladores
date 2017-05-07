@@ -46,31 +46,41 @@ class PessoaFisica extends Pessoa {
   }
 
   Endereco endereco;
-  Endereco endereco_2;
-  Endereco endereco_3;
+
+  int metodo_1(){
+
+    int y;
+    read y;
+
+    //teste de if e else
+    if(1>2){
+      print "Teste 1 \n";
+    } else{
+      print "Teste 2 \n";
+    }
+
+    //teste de for
+    for (i = 0; i < 10; i = i + 1){
+      print "Teste\n";
+      if(i==10){
+        break;
+      }
+    }
+
+    //teste de while
+    while (1>0) {
+      print "Teste true\n";
+    }
+
+    //teste do while
+    do {
+      print "Teste true\n";
+    } while(1>0);
+
+    return 0;
+  }
 
 
-   int metodoComForEPrint(){
-     for (i = 0; i < 10; i = i + 1){
-       print "Teste\n";
-     }
-     return 0;
-   }
-
-   int metodoComRead(){
-     int a, b;
-     read a; read b;
-   }
-
-   int metodoComIf(){
-
-     if(1>2){
-       return 0;
-     } else{
-       return 0;
-     }
-
-   }
 
    int metodoComSwitch(){
      int a;
@@ -89,12 +99,12 @@ class PessoaFisica extends Pessoa {
      int a = 1;
      double b = 1.1;
      endereco = new Endereco();
-     endereco_2 = new Endereco("Rua 1");
-     endereco_3 = new Endereco("Rua 1", 87);
+     endereco = new Endereco("Rua 1");
+     endereco = new Endereco("Rua 1", 87);
 
      string rua = "teste";
      int numero = 2;
-     endereco_3 = new Endereco(rua, 2);
+     endereco = new Endereco(rua, 2);
 
      int m[][] = new int[1][2];
      string m_2 = new string[1];
