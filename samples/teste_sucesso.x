@@ -49,6 +49,19 @@ class PessoaFisica extends Pessoa {
   //constante null
   Pessoa nullTeste = null;
 
+  /*
+  * Teste comentario
+  */
+
+  //testa operadores booleanos
+  boolean operador_igual = (1 == 2);
+  boolean operador_maior_igual = (1 >= 2);
+  boolean operador_menor_igual = (1 <= 2);
+  boolean operador_maior = (1 > 2);
+  boolean operador_menor = (1 < 2);
+  boolean operador_diferente = (1 != 2);
+
+
   class Endereco{
     string rua;
     int numero;
@@ -68,6 +81,7 @@ class PessoaFisica extends Pessoa {
 
   }
 
+  // Variavel criada com identificador
   Endereco endereco;
 
   int metodo_1(){
