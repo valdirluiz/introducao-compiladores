@@ -61,6 +61,15 @@ class PessoaFisica extends Pessoa {
   boolean operador_menor = (1 < 2);
   boolean operador_diferente = (1 != 2);
 
+  //testa operadores de adicao, substracao, multiplicacao, divisao, modulo...
+
+  int operadorAdicao = 1+1;
+  int operadorSubstracao = 1-1;
+  double operadorDivisao = 2/1;
+  int operadorMultiplicacao = 2*2;
+  double operadorModulo = 2%2;
+
+
 
   class Endereco{
     string rua;

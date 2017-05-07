@@ -176,7 +176,7 @@ TOKEN :
 |
   < char_constant: "\'" ( ~["\"","\n","\r"]){1} "\'" >
 |
-  < null_constant: "null" >
+  < null_constant: ("null"){1} >
 }
 
 /* Identificadores */
@@ -194,7 +194,7 @@ TOKEN :
 
 TOKEN :
 {
-  < LPAREN: "(" >
+  < LPAREN: ["("] >
 | < RPAREN: ")" >
 | < LBRACE: "{" >
 | < RBRACE: "}" >
