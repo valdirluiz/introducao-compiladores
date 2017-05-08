@@ -14,7 +14,7 @@ import java.io.*;
 
 
 public class langX {
-final static String Version = "X++ Compiler - Version 1.0 - 2004";
+final static String Version = "X+++ Compiler - Version 1.0 - 2017";
 boolean Menosshort = false; // saída resumida = falso
 
 
