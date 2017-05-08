@@ -14,7 +14,7 @@ import java.io.*;
 
 
 public class langX {
-final static String Version = "X++ Compiler - Version 1.0 - 2004";
+final static String Version = "X+++ Compiler - Version 1.0 - 2017";
 boolean Menosshort = false; // saída resumida = falso
 
 
@@ -194,34 +194,34 @@ TOKEN :
 
 TOKEN :
 {
-  < LPAREN: ["("] >
-| < RPAREN: [")"] >
-| < LBRACE: ["{"] >
-| < RBRACE: ["}"] >
-| < LBRACKET: ["["] >
-| < RBRACKET: ["]"] >
-| < SEMICOLON: [";"] >
-| < COMMA: [","] >
-| < DOT: ["."] >
-| < COLON: [":"] >
+  < LPAREN: ("("){1} >
+| < RPAREN: (")"){1} >
+| < LBRACE: ("{"){1} >
+| < RBRACE: ("}"){1} >
+| < LBRACKET: ("["){1} >
+| < RBRACKET: ("]"){1} >
+| < SEMICOLON: (";"){1} >
+| < COMMA: (","){1} >
+| < DOT: ("."){1} >
+| < COLON: (":"){1} >
 }
 
 /* Operadores */
 
 TOKEN :
 {
-  < ASSIGN: "=" >
-| < GT: ">" >
-| < LT: "<" >
-| < EQ: "==" >
-| < LE: "<=" >
-| < GE: ">=" >
-| < NEQ: "!=" >
-| < PLUS: "+" >
-| < MINUS: "-" >
-| < STAR: "*" >
-| < SLASH: "/" >
-| < REM: "%" >
+  < ASSIGN: ("="){1} >
+| < GT: (">"){1} >
+| < LT: ("<"){1} >
+| < EQ: ("=="){1} >
+| < LE: ("<="){1} >
+| < GE: (">="){1} >
+| < NEQ: ("!="){1} >
+| < PLUS: ("+"){1} >
+| < MINUS: ("-"){1} >
+| < STAR: ("*"){1} >
+| < SLASH: ("/"){1} >
+| < REM: ("%"){1} >
 }
 
 /* Trata os erros léxicos */
