@@ -130,28 +130,28 @@ SKIP :
 
 TOKEN :
 {
-  < BREAK: "break" >
-| < CLASS: "class" >
-| < CONSTRUCTOR: "constructor" >
-| < ELSE: "else" >
-| < EXTENDS: "extends" >
-| < FOR: "for" >
-| < IF: "if" >
-| < INT: "int" >
-| < STRING: "string" >
-| < CHAR: "char" >
-| < BOOLEAN: "boolean" >
-| < DOUBLE: "double" >
-| < NEW: "new" >
-| < PRINT: "print" >
-| < READ: "read" >
-| < RETURN: "return" >
-| < SUPER: "super" >
-| < WHILE: "while" >
-| < DO: "do" >
-| < SWITCH: "switch" >
-| < CASE: "case" >
-| < DEFAULT_CASE: "default" >
+  < BREAK: ("break"){1} >
+| < CLASS: ("class"){1} >
+| < CONSTRUCTOR: ("constructor"){1} >
+| < ELSE: ("else"){1} >
+| < EXTENDS: ("extends"){1} >
+| < FOR: ("for"){1} >
+| < IF: ("if"){1} >
+| < INT: ("int"){1} >
+| < STRING: ("string"){1} >
+| < CHAR: ("char"){1} >
+| < BOOLEAN: ("boolean"){1} >
+| < DOUBLE: ("double"){1} >
+| < NEW: ("new"){1} >
+| < PRINT: ("print"){1} >
+| < READ: ("read"){1} >
+| < RETURN: ("return"){1} >
+| < SUPER: ("super"){1} >
+| < WHILE: ("while"){1} >
+| < DO: ("do"){1} >
+| < SWITCH: ("switch"){1} >
+| < CASE: ("case"){1} >
+| < DEFAULT_CASE: ("default"){1} >
 }
 
 /* constantes */
