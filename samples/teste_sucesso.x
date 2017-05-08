@@ -42,9 +42,15 @@ class PessoaFisica extends Pessoa {
   boolean testeBoolean1 = true;
   boolean testeBoolean2 = false;
 
+  //atribuicao booleana
+  boolean testeBoolean3 = 1 < 2 ;
+
   //constante char
   char charTeste = 'a';
   char charTeste2 = 'A';
+
+  //constante String
+  string constanteString = "teste constante String";
 
   //constante null
   Pessoa nullTeste = null;
@@ -70,7 +76,7 @@ class PessoaFisica extends Pessoa {
   double operadorModulo = 2%2;
 
 
-
+  //classe alinhada
   class Endereco{
     string rua;
     int numero;
@@ -109,13 +115,9 @@ class PessoaFisica extends Pessoa {
     for (i = 0; i < 10; i = i + 1){
       print "Teste\n";
       if(i==10){
+        //exemplo de break
         break;
       }
-    }
-
-    //teste de while
-    while (1>0) {
-      print "Teste true\n";
     }
 
     //teste do while
@@ -123,11 +125,26 @@ class PessoaFisica extends Pessoa {
       print "Teste true\n";
     } while(1>0);
 
+    //teste de while
+    while (1>0) {
+      print "Teste true\n";
+    }
+
+    //criando objetos
+    endereco = new Endereco();
+    endereco = new Endereco("Rua 1");
+    endereco = new Endereco("Rua 1", 87);
+
+    //matrizes
+    int m[][] = new int[1][2];
+    string m_2 = new string[1];
+    double m_3 = new string[1];
+
     return 0;
   }
 
 
-
+   //metodo com ex de switch
    int metodoComSwitch(){
      int a;
      switch (a) {
@@ -140,26 +157,8 @@ class PessoaFisica extends Pessoa {
      }
    }
 
-   int metodoComAtribuicoesDeTodosOsTipos(){
-     //TODO: add tipo char
-     int a = 1;
-     double b = 1.1;
-     endereco = new Endereco();
-     endereco = new Endereco("Rua 1");
-     endereco = new Endereco("Rua 1", 87);
 
-     string rua = "teste";
-     int numero = 2;
-     endereco = new Endereco(rua, 2);
-
-     int m[][] = new int[1][2];
-     string m_2 = new string[1];
-     double m_3 = new string[1];
-
-     boolean b1 = 1 < 2 ;
-
-   }
-
+   //metodo que retorna matriz
    int [] retornaVetor(int a) {
      return new int[1];
    }
