@@ -174,7 +174,7 @@ TOKEN :
 |
   < boolean_constant: ("true" | "false") >
 |
-  < char_constant: "\'" ( ~["\"","\n","\r"]){1} "\'" >
+  < char_constant: "\'" (["0"-"9","A"-"Z","a"-"z"]){1} "\'" >
 |
   < null_constant: ("null"){1} >
 }
