@@ -195,15 +195,15 @@ TOKEN :
 TOKEN :
 {
   < LPAREN: ["("] >
-| < RPAREN: ")" >
-| < LBRACE: "{" >
-| < RBRACE: "}" >
-| < LBRACKET: "[" >
-| < RBRACKET: "]" >
-| < SEMICOLON: ";" >
-| < COMMA: "," >
-| < DOT: "." >
-| < TWOPOINTS: ":" >
+| < RPAREN: [")"] >
+| < LBRACE: ["{"] >
+| < RBRACE: ["}"] >
+| < LBRACKET: ["["] >
+| < RBRACKET: ["]"] >
+| < SEMICOLON: [";"] >
+| < COMMA: [","] >
+| < DOT: ["."] >
+| < COLON: [":"] >
 }
 
 /* Operadores */

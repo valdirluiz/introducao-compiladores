@@ -91,7 +91,7 @@ public interface langXConstants {
   /** RegularExpression Id. */
   int DOT = 51;
   /** RegularExpression Id. */
-  int TWOPOINTS = 52;
+  int COLON = 52;
   /** RegularExpression Id. */
   int ASSIGN = 53;
   /** RegularExpression Id. */
@@ -174,15 +174,15 @@ public interface langXConstants {
     "<LETTER>",
     "<DIGIT>",
     "<LPAREN>",
-    "\")\"",
-    "\"{\"",
-    "\"}\"",
-    "\"[\"",
-    "\"]\"",
-    "\";\"",
-    "\",\"",
-    "\".\"",
-    "\":\"",
+    "<RPAREN>",
+    "<LBRACE>",
+    "<RBRACE>",
+    "<LBRACKET>",
+    "<RBRACKET>",
+    "<SEMICOLON>",
+    "<COMMA>",
+    "<DOT>",
+    "<COLON>",
     "\"=\"",
     "\">\"",
     "\"<\"",
