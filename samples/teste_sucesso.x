@@ -82,6 +82,7 @@ class PessoaFisica extends Pessoa {
     int numero;
 
     constructor(){
+      //chamada de constructor da classe pai
       super("nome");
     }
 
