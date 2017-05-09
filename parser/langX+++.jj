@@ -141,6 +141,8 @@ TOKEN :
 | < STRING: ("string"){1} >
 | < CHAR: ("char"){1} >
 | < BOOLEAN: ("boolean"){1} >
+| < AND: ("&&"){1} >
+| < OR: ("||"){1} >
 | < DOUBLE: ("double"){1} >
 | < NEW: ("new"){1} >
 | < PRINT: ("print"){1} >

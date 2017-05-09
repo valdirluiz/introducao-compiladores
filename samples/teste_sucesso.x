@@ -112,6 +112,16 @@ class PessoaFisica extends Pessoa {
       print "Teste 2 \n";
     }
 
+    //if com and
+    if(true && true){
+      print "Teste 1 \n";
+    }
+
+    //if com or
+    if(true || false){
+      print "Teste 1 \n";
+    }
+
     //teste de for
     for (i = 0; i < 10; i = i + 1){
       print "Teste\n";
@@ -126,7 +136,7 @@ class PessoaFisica extends Pessoa {
       print "Teste true\n";
     } while(1>0);
 
-    //teste de while
+    //teste  while
     while (1>0) {
       print "Teste true\n";
     }

@@ -1,6 +1,10 @@
 class data {
 
-int #dia, _mes, ano;
+int #dia, mes, ano;
+
+char charTeste1 = '%';
+char charTeste2 = '*';
+char charTeste3 = '$';
 
 constructor() {
   #### ano = 1900;
@@ -8,7 +12,7 @@ constructor() {
    dia = 1;
 }
 
-constructor(int _d, int ^m, int @a) {
+constructor(int d, int ^m, int @a) {
    dia = d;
    mes = m;
    ano = a;
