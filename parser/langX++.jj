@@ -328,7 +328,7 @@ void vardecl():
 {
 }
 {
-   (<INT> |  <STRING> | <DOUBLE> | <IDENT> )
+   (<INT> | <CHAR> | <BOOLEAN> | <STRING> | <DOUBLE> | <IDENT> )
    <IDENT> ( <LBRACKET> <RBRACKET>)*
   (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )*
 }

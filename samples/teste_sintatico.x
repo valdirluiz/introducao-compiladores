@@ -4,7 +4,8 @@ class Teste {
   int varInt;
   string varString;
   double varDouble;
-
+  char varChar;
+  boolean varBoolean;
 
   constructor(){
     ;
