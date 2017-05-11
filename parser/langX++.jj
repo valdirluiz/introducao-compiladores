@@ -388,6 +388,8 @@ void statement():
 |
     forstat()
 |
+    whilestat()
+|
     <LBRACE> statlist() <RBRACE>
 |
     <BREAK> <SEMICOLON>
@@ -532,4 +534,12 @@ void arglist():
 }
 {
     [expression() (<COMMA> expression())*]
+}
+
+
+void whilestat():
+{
+}
+{
+    <WHILE> <LPAREN> expression() <RPAREN>  statement()
 }

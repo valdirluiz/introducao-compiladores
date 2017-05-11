@@ -57,9 +57,9 @@ class Teste {
 
 
   int metodoComWhile(){
-    while (1>0)
+    while (1>0){
       print "Teste true\n";
-     
+    } 
   }
 
   //TODO: ajustar esta com erro
