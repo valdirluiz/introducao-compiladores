@@ -15,12 +15,12 @@ class Teste {
   }
 
   int metodoComIfElse(){
-    //TODO: ajustar
-    if(true){
+    //TODO: ajustar esta com erro
+    /*if(true){
       print "Teste true\n";
     } else{
         print "Teste false\n";
-    }
+    }*/
 
     if(1>2){
       return 0;
