@@ -437,7 +437,7 @@ void ifstat():
 {
 }
 {
-    <IF> <LPAREN> (expression() | <boolean_constant>) <RPAREN> statement()
+    <IF> <LPAREN>   expression()  <RPAREN> statement()
     [LOOKAHEAD(1) <ELSE> statement()]
 }
 
@@ -486,7 +486,7 @@ void expression() :
 {
 }
 {
-    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]
+    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()] | <boolean_constant>
 }
 
 void numexpr():

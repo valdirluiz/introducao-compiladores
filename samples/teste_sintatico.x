@@ -17,6 +17,14 @@ class Teste {
 
   int metodoComIfElse(){
 
+    if(true || false){
+      print "Teste true ou false\n";
+    }
+
+    if(true && false){
+      print "Teste true e false\n";
+    }
+
     if(true){
       print "Teste true\n";
     } else{
