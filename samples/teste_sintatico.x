@@ -59,14 +59,14 @@ class Teste {
   int metodoComWhile(){
     while (1>0){
       print "Teste true\n";
-    } 
+    }
   }
 
   //TODO: ajustar esta com erro
   /*int metodoComWhile(){
     do {
       print "Teste true\n";
-    } while(1>0);
+    } (1>0);
     return 0;
   }*/
 
