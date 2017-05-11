@@ -1,11 +1,6 @@
 /*************************************************************************
 Arquivo a ser processado pelo programa JavaCC.
-Cont�m:
-       - descri��o do analisador l�xico para a linguagem X++
-       - descri��o do analisador sint�tico para a linguagem X++
 
-Autor: Marcio Delamaro
-Este programa � parte do livro "Constru��o de compiladores usando ferra..."
 ************************************************************************/
 options {
   STATIC = false;
@@ -147,44 +142,62 @@ SKIP :
 
 TOKEN :
 {
-  < BREAK: "break" >
-| < CLASS: "class" >
-| < CONSTRUCTOR: "constructor" >
-| < ELSE: "else" >
-| < EXTENDS: "extends" >
-| < FOR: "for" >
-| < IF: "if" >
-| < INT: "int" >
-| < NEW: "new" >
-| < PRINT: "print" >
-| < READ: "read" >
-| < RETURN: "return" >
-| < STRING: "string" >
-| < SUPER: "super" >
+  < BREAK: ("break"){1} >
+| < CLASS: ("class"){1} >
+| < CONSTRUCTOR: ("constructor"){1} >
+| < ELSE: ("else"){1} >
+| < EXTENDS: ("extends"){1} >
+| < FOR: ("for"){1} >
+| < IF: ("if"){1} >
+| < INT: ("int"){1} >
+| < STRING: ("string"){1} >
+| < CHAR: ("char"){1} >
+| < BOOLEAN: ("boolean"){1} >
+| < AND: ("&&"){1} >
+| < OR: ("||"){1} >
+| < DOUBLE: ("double"){1} >
+| < NEW: ("new"){1} >
+| < PRINT: ("print"){1} >
+| < READ: ("read"){1} >
+| < RETURN: ("return"){1} >
+| < SUPER: ("super"){1} >
+| < WHILE: ("while"){1} >
+| < DO: ("do"){1} >
+| < SWITCH: ("switch"){1} >
+| < CASE: ("case"){1} >
+| < DEFAULT_CASE: ("default"){1} >
 }
 
 /* constantes */
 
 TOKEN :
 {
-  < int_constant:(  // n�meros decimais, octais, hexadecimais ou bin�rios
-                  (["0"-"9"] (["0"-"9"])* ) |
-                  (["0"-"7"] (["0"-"7"])* ["o", "O"] ) |
-                  (["0"-"9"] (["0"-"7","A"-"F","a"-"f"])* ["h", "H"] ) |
-                  (["0"-"1"] (["0"-"1"])* ["b", "B"])
-                 ) >
+  < int_constant:((["0"-"9"] (["0"-"9"])* )) >
 |
-  < string_constant:    // constante string como "abcd bcda"
+
+< float_constant:(
+                (["0"-"9"] (["0"-"9"])* "." ["0"-"9"] (["0"-"9"])*) |
+                ("." ["0"-"9"] (["0"-"9"])*) |
+                (["0"-"9"] (["0"-"9"])* "." ["0"-"9"] (["0"-"9"])* ("e" | "E") "-" (["0"-"9"] (["0"-"9"])*)) |
+                ("." ["0"-"9"] (["0"-"9"])* ("e" | "E") "-" (["0"-"9"] (["0"-"9"])*))
+               ) >
+|
+
+  < string_constant:
       "\""( ~["\"","\n","\r"])* "\"" >
 |
-  < null_constant: "null" > // constante null
+  < boolean_constant: ("true" | "false") >
+|
+  < char_constant: "\'" (["0"-"9","A"-"Z","a"-"z"]){1} "\'" >
+|
+  < null_constant: ("null"){1} >
 }
 
 /* Identificadores */
 
 TOKEN :
 {
-  < IDENT: <LETTER> (<LETTER>|<DIGIT>)* >
+  < IDENT: <LETTER> (<LETTER>|<DIGIT> | "_")* >
 |
   < #LETTER:["A"-"Z","a"-"z"] >
 |
@@ -195,33 +208,34 @@ TOKEN :
 
 TOKEN :
 {
-  < LPAREN: "(" >
-| < RPAREN: ")" >
-| < LBRACE: "{" >
-| < RBRACE: "}" >
-| < LBRACKET: "[" >
-| < RBRACKET: "]" >
-| < SEMICOLON: ";" >
-| < COMMA: "," >
-| < DOT: "." >
+  < LPAREN: ("("){1} >
+| < RPAREN: (")"){1} >
+| < LBRACE: ("{"){1} >
+| < RBRACE: ("}"){1} >
+| < LBRACKET: ("["){1} >
+| < RBRACKET: ("]"){1} >
+| < SEMICOLON: (";"){1} >
+| < COMMA: (","){1} >
+| < DOT: ("."){1} >
+| < COLON: (":"){1} >
 }
 
 /* Operadores */
 
 TOKEN :
 {
-  < ASSIGN: "=" >
-| < GT: ">" >
-| < LT: "<" >
-| < EQ: "==" >
-| < LE: "<=" >
-| < GE: ">=" >
-| < NEQ: "!=" >
-| < PLUS: "+" >
-| < MINUS: "-" >
-| < STAR: "*" >
-| < SLASH: "/" >
-| < REM: "%" >
+  < ASSIGN: ("="){1} >
+| < GT: (">"){1} >
+| < LT: ("<"){1} >
+| < EQ: ("=="){1} >
+| < LE: ("<="){1} >
+| < GE: (">="){1} >
+| < NEQ: ("!="){1} >
+| < PLUS: ("+"){1} >
+| < MINUS: ("-"){1} >
+| < STAR: ("*"){1} >
+| < SLASH: ("/"){1} >
+| < REM: ("%"){1} >
 }
 
 /* Trata os erros l�xicos */
@@ -249,6 +263,8 @@ SPECIAL_TOKEN :
   "*",
   "/",
   "%",
+  ":",
+  "_",
   " ",
   "\t",
   "\n",
@@ -312,7 +328,7 @@ void vardecl():
 {
 }
 {
-   (<INT> |  <STRING> | <IDENT> )
+   (<INT> |  <STRING> | <DOUBLE> | <IDENT> )
    <IDENT> ( <LBRACKET> <RBRACKET>)*
   (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )*
 }
