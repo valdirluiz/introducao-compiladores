@@ -390,6 +390,8 @@ void statement():
 |
     whilestat()
 |
+    doWhileStat()
+|
     <LBRACE> statlist() <RBRACE>
 |
     <BREAK> <SEMICOLON>
@@ -542,4 +544,11 @@ void whilestat():
 }
 {
     <WHILE> <LPAREN> expression() <RPAREN>  statement()
+}
+
+void doWhileStat():
+{
+}
+{
+    <DO> statement() <LPAREN> expression() <RPAREN>
 }

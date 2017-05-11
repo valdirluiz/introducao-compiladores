@@ -62,13 +62,27 @@ class Teste {
     }
   }
 
-  //TODO: ajustar esta com erro
-  /*int metodoComWhile(){
+
+  int metodoComWhile(){
     do {
       print "Teste true\n";
     } (1>0);
     return 0;
-  }*/
+  }
+
+  int metodoComWhileBoolean(){
+    do {
+      print "Teste true\n";
+    } (true);
+    return 0;
+  }
+
+  int metodoComWhileString(){
+    do {
+      print "Teste true\n";
+    } ("Ok");
+    return 0;
+  }
 
 
 
