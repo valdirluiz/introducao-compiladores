@@ -437,7 +437,7 @@ void ifstat():
 {
 }
 {
-    <IF> <LPAREN> expression() <RPAREN> statement()
+    <IF> <LPAREN> (expression() | <boolean_constant>) <RPAREN> statement()
     [LOOKAHEAD(1) <ELSE> statement()]
 }
 
