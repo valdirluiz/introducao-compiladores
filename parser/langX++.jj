@@ -486,7 +486,9 @@ void expression() :
 {
 }
 {
-    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()] | <boolean_constant>
+    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()] |
+    LOOKAHEAD(2) <boolean_constant> (<OR> | <AND>) <boolean_constant> |
+    <boolean_constant>
 }
 
 void numexpr():

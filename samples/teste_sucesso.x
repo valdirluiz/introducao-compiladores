@@ -122,6 +122,8 @@ class PessoaFisica extends Pessoa {
       print "Teste 1 \n";
     }
 
+     
+
     //teste de for
     for (i = 0; i < 10; i = i + 1){
       print "Teste\n";
