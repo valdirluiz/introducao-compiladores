@@ -87,7 +87,7 @@ class Teste {
 
 
 
-//TODO: ajustar esta com erro
+ 
   int metodoComSwitch(){
     int a;
     switch (a) {
