@@ -559,19 +559,15 @@ void switchStat():
 {
 }
 {
-    <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> switchCasesStat() <RBRACE>
+    <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> switchCaseStat() (switchCaseStat())+  <RBRACE>
 }
 
-void switchCasesStat():
-{
-}
-{
-    (switchCaseStat())+
-}
+
 
 void switchCaseStat():
 {
 }
 {
-    (<CASE> factor() | <DEFAULT_CASE>) <COLON> statement()
+     (<CASE> factor() | <DEFAULT_CASE>) <COLON> statement() 
+
 }

@@ -92,11 +92,11 @@ class Teste {
     int a;
     switch (a) {
       case 1 :
-         //return a + 1;
-     case 2 :
-        //return  a + 2;
+         return a + 1;
+      case 2 :
+        return  a + 2;
      default:
-        //return 0;
+        return 0;
     }
   }
 
