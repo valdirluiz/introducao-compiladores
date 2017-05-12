@@ -392,6 +392,8 @@ void statement():
 |
     doWhileStat()
 |
+    switchStat()
+|
     <LBRACE> statlist() <RBRACE>
 |
     <BREAK> <SEMICOLON>
