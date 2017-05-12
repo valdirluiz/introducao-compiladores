@@ -552,3 +552,24 @@ void doWhileStat():
 {
     <DO> statement() <LPAREN> expression() <RPAREN>
 }
+
+void switchStat():
+{
+}
+{
+    <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> switchCasesStat() <RBRACE>
+}
+
+void switchCasesStat():
+{
+}
+{
+    (switchCaseStat())+
+}
+
+void switchCaseStat():
+{
+}
+{
+    (<CASE> factor() | <DEFAULT_CASE>) <COLON> statement()
+}

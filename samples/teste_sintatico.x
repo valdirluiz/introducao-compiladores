@@ -77,26 +77,27 @@ class Teste {
     return 0;
   }
 
-  int metodoComWhileString(){
+  // TODO: Ajustar
+  /*int metodoComWhileString(){
     do {
       print "Teste true\n";
     } ("Ok");
     return 0;
-  }
+  }*/
 
 
 
 //TODO: ajustar esta com erro
-/*  int metodoComSwitch(){
+  int metodoComSwitch(){
     int a;
     switch (a) {
       case 1 :
-         return a + 1;
+         //return a + 1;
      case 2 :
-        return  a + 2;
+        //return  a + 2;
      default:
-        return 0;
+        //return 0;
     }
-  }*/
+  }
 
 }
