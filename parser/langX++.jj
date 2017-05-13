@@ -472,7 +472,7 @@ void lvalue() :
 {
    <IDENT> (
            <LBRACKET> expression() <RBRACKET> |
-           <DOT> <IDENT> [<LPAREN> arglist() <RPAREN>]
+           <DOT> <IDENT> [LOOKAHEAD(2)<LPAREN> arglist() <RPAREN>]
          )*
 }
 
@@ -492,16 +492,23 @@ void expression() :
 {
 }
 {
-    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()] |
+    (bolleanExpression() ((<AND> | <OR>) bolleanExpression())*)+ |
     (<boolean_constant> ((<AND> | <OR>) <boolean_constant>)*)+
 
+}
+
+void bolleanExpression():
+{
+}
+{
+  numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]
 }
 
 void numexpr():
 {
 }
 {
-    term() ((<PLUS> | <MINUS>) term())*
+    term() (LOOKAHEAD(2)(<PLUS> | <MINUS>) term())*
 }
 
 void term():

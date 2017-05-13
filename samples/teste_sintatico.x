@@ -37,12 +37,40 @@ class Teste {
         print "Teste false\n";
     }
 
-
     if(1>2){
       return 0;
     } else{
       return 1;
     }
+
+    if(1>2 && 2>2){
+      return 0;
+    } else{
+      return 1;
+    }
+
+    if(1>2 || 2>2){
+      return 0;
+    } else{
+      return 1;
+    }
+
+    if(1>2 || 2>2 && 1==2 || 2<10){
+      return 0;
+    } else{
+      return 1;
+    }
+
+    int a;
+    if(a>2){
+      ;
+    }
+
+    //TODO: ver pq esta deixando validar
+    if("teste true"){
+      ;
+    }
+
   }
 
   int metodoComFor(){
