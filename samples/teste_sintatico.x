@@ -34,8 +34,9 @@ class Teste1 extends Teste{
   }
 
   int criacaoDeObjetos(){
-    Teste teste1;
-    teste1 = new Teste();
+    Teste testeCriacao;
+    testeCriacao = new Teste();
+    testeCriacao = new Teste(1);
   }
 
   int metodoComIfElse(){
