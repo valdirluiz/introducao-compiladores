@@ -492,8 +492,7 @@ void expression() :
 {
 }
 {
-    (bolleanExpression() ((<AND> | <OR>) bolleanExpression())*)+ |
-    (<boolean_constant> ((<AND> | <OR>) <boolean_constant>)*)+
+    ((bolleanExpression() | <boolean_constant>) ((<AND> | <OR>) (bolleanExpression() | <boolean_constant>))*)+ 
 
 }
 
