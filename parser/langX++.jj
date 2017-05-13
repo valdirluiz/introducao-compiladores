@@ -328,7 +328,7 @@ void vardecl():
 {
 }
 {
-   (<INT> | <CHAR> | <BOOLEAN> | <STRING> | <DOUBLE> | <IDENT> )
+   (<INT> |  <STRING> | <DOUBLE> | <BOOLEAN> | <IDENT> )
    <IDENT> ( <LBRACKET> <RBRACKET>)*
   (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )*
 }
@@ -388,12 +388,6 @@ void statement():
 |
     forstat()
 |
-    whilestat()
-|
-    doWhileStat()
-|
-    switchStat()
-|
     <LBRACE> statlist() <RBRACE>
 |
     <BREAK> <SEMICOLON>
@@ -443,7 +437,7 @@ void ifstat():
 {
 }
 {
-    <IF> <LPAREN>   expression()  <RPAREN> statement()
+    <IF> <LPAREN> (expression() | <boolean_constant>) <RPAREN> statement()
     [LOOKAHEAD(1) <ELSE> statement()]
 }
 
@@ -492,9 +486,7 @@ void expression() :
 {
 }
 {
-    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()] |
-    LOOKAHEAD(2) <boolean_constant> (<OR> | <AND>) <boolean_constant> |
-    <boolean_constant>
+    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]
 }
 
 void numexpr():
@@ -538,36 +530,4 @@ void arglist():
 }
 {
     [expression() (<COMMA> expression())*]
-}
-
-
-void whilestat():
-{
-}
-{
-    <WHILE> <LPAREN> expression() <RPAREN>  statement()
-}
-
-void doWhileStat():
-{
-}
-{
-    <DO> statement() <LPAREN> expression() <RPAREN>
-}
-
-void switchStat():
-{
-}
-{
-    <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> switchCaseStat() (switchCaseStat())+  <RBRACE>
-}
-
-
-
-void switchCaseStat():
-{
-}
-{
-     (<CASE> factor() | <DEFAULT_CASE>) <COLON> statement() 
-
 }

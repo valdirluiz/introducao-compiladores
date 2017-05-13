@@ -1,11 +1,11 @@
 class Teste {
 
-
+  //declaração de variaveis
   int varInt;
   string varString;
   double varDouble;
-  char varChar;
   boolean varBoolean;
+  char varChar;
 
   constructor(){
     ;
@@ -77,17 +77,19 @@ class Teste {
     return 0;
   }
 
-  // TODO: Ajustar
-  /*int metodoComWhileString(){
+  int metodoComWhileString(){
+    if("teste"){
+      ;
+    }
     do {
       print "Teste true\n";
     } ("Ok");
     return 0;
-  }*/
+  }
 
 
 
- 
+
   int metodoComSwitch(){
     int a;
     switch (a) {
