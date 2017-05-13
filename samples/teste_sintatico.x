@@ -1,4 +1,22 @@
-class Teste {
+class Teste{
+
+  int id;
+
+  constructor(){
+    ;
+  }
+
+  constructor(int i){
+    id = i;
+  }
+
+  int getId(){
+    return id;
+  }
+
+}
+
+class Teste1 extends Teste{
 
   //declaração de variaveis
   int varInt;
@@ -13,6 +31,11 @@ class Teste {
 
   constructor(int teste){
     x = teste;
+  }
+
+  int criacaoDeObjetos(){
+    Teste teste1;
+    teste1 = new Teste();
   }
 
   int metodoComIfElse(){
@@ -99,7 +122,7 @@ class Teste {
     do {
       print "Teste true\n";
     } (true || false && 1>2);
-    
+
     return 0;
   }
 

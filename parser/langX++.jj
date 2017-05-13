@@ -481,10 +481,12 @@ void alocexpression() :
 }
 {
     <NEW> (
-             LOOKAHEAD(2) <IDENT> <LPAREN> arglist() <RPAREN> |
+             LOOKAHEAD(2) <IDENT> <LPAREN> arglist() <RPAREN>
+             |
              ( <INT> | <STRING> | <IDENT> )
              (<LBRACKET> expression() <RBRACKET>)+
           )
+
 }
 
 
@@ -492,7 +494,7 @@ void expression() :
 {
 }
 {
-    ((bolleanExpression() | <boolean_constant>) ((<AND> | <OR>) (bolleanExpression() | <boolean_constant>))*)+ 
+    ((bolleanExpression() | <boolean_constant>) ((<AND> | <OR>) (bolleanExpression() | <boolean_constant>))*)+
 
 }
 
