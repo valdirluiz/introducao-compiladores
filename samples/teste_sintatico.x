@@ -37,6 +37,7 @@ class Teste {
         print "Teste false\n";
     }
 
+
     if(1>2){
       return 0;
     } else{
@@ -71,9 +72,10 @@ class Teste {
   }
 
   int metodoComWhileBoolean(){
-    do {
+    /*do {
       print "Teste true\n";
-    } (true);
+    } (true || false && 1>2);
+    */
     return 0;
   }
 
