@@ -66,10 +66,6 @@ class Teste {
       ;
     }
 
-    //TODO: ver pq esta deixando validar
-    if("teste true"){
-      ;
-    }
 
   }
 
@@ -100,20 +96,17 @@ class Teste {
   }
 
   int metodoComWhileBoolean(){
-    /*do {
+    do {
       print "Teste true\n";
     } (true || false && 1>2);
-    */
+    
     return 0;
   }
 
   int metodoComWhileString(){
-    if("teste"){
-      ;
-    }
     do {
       print "Teste true\n";
-    } ("Ok");
+    } (true || 1<2);
     return 0;
   }
 

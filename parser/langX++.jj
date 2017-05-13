@@ -413,7 +413,7 @@ void printstat():
 {
 }
 {
-    <PRINT> expression()
+    <PRINT> (expression() | <string_constant>)
 }
 
 void readstat():
@@ -534,8 +534,6 @@ void factor():
 
     (
        <int_constant> |
-       <string_constant> |
-       <null_constant> |
        lvalue() |
        <LPAREN> expression() <RPAREN>)
 }
