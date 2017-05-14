@@ -65,7 +65,7 @@ class Teste1 extends Teste{
       }
     }
   }
-  
+
   int criacaoMatriz(){
     int m[][];
     m = new int[1][2];
@@ -142,21 +142,15 @@ class Teste1 extends Teste{
 
   }
 
-  int metodoComFor(){
-    int i;
-    for (i = 0; i < 10; i = i + 1){
-      print "Teste\n";
-      if(i==10){
-        break;
-      }
-    }
-    return 0;
-  }
 
 
   int metodoComWhile(){
     while (1>0){
       print "Teste true\n";
+    }
+
+    while (true){
+      break;
     }
   }
 
