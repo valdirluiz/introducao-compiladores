@@ -54,6 +54,16 @@ class Teste1 extends Teste{
     operador = 2%2;
   }
 
+  int criacaoMatriz(){
+    int m[][];
+    m = new int[1][2];
+
+    string m_2;
+    m_2 = new string[1];
+
+    double m_3;
+    m_3 = new string[1];
+  }
 
   int criacaoDeObjetos(){
     Teste testeCriacao;
