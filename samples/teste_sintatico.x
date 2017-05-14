@@ -25,7 +25,7 @@ class Teste1 extends Teste{
 
   //declaração de variaveis
   int varInt;
-  string varString;
+  string varString, varString2;
   boolean varBoolean;
   double testeFloat;
   char testeChar;
