@@ -33,10 +33,35 @@ class Teste1 extends Teste{
     x = teste;
   }
 
+  int testaOperacoes(){
+    //testa operadores booleanos
+    boolean operadorBoolean;
+    operadorBoolean = (1 == 2);
+    operadorBoolean = (1 >= 2);
+    operadorBoolean = (1 <= 2);
+    operadorBoolean = (1 > 2);
+    operadorBoolean = (1 < 2);
+    operadorBoolean = (1 != 2);
+
+    //testa operadores de adicao, substracao, multiplicacao, divisao, modulo...
+    double operador;
+    operador = 1+1;
+    operador = 1-1;
+    operador = 2/1;
+    operador = 2*2;
+    operador = 2%2;
+  }
+
+
   int criacaoDeObjetos(){
     Teste testeCriacao;
     testeCriacao = new Teste();
     testeCriacao = new Teste(1);
+
+    //TODO: nao esta funcionando, ajustar
+    //testeCriacao.getId();
+
+    return 0;
   }
 
   int metodoComIfElse(){
