@@ -54,6 +54,18 @@ class Teste1 extends Teste{
     operador = 2%2;
   }
 
+  int metodoComFor(){
+    //teste de for
+      int i;
+    for (i = 0; i < 10; i = i + 1){
+      print "Teste\n";
+      if(i==10){
+        //exemplo de break
+        break;
+      }
+    }
+  }
+  
   int criacaoMatriz(){
     int m[][];
     m = new int[1][2];
