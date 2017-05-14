@@ -18,6 +18,10 @@ class Teste{
 
 class Teste1 extends Teste{
 
+  /*
+  * Teste comentario multilinhas
+  */
+
 
   //declaração de variaveis
   int varInt;
@@ -50,6 +54,11 @@ class Teste1 extends Teste{
   constructor(int teste){
     x = teste;
     super(1);
+  }
+
+  int metodoComRead(){
+    int y;
+    read y;
   }
 
   int testaOperacoes(){
