@@ -406,7 +406,7 @@ void atribstat():
 {
 }
 {
-    lvalue() <ASSIGN> ( alocexpression() | expression())
+    lvalue() <ASSIGN> ( alocexpression() | expression() | <float_constant> | <char_constant> | <string_constant>)
 }
 
 void printstat():

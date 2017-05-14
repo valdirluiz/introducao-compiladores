@@ -22,12 +22,29 @@ class Teste1 extends Teste{
   //declaração de variaveis
   int varInt;
   string varString;
-  double varDouble;
   boolean varBoolean;
-  char varChar;
+  double testeFloat;
+  char testeChar;
+
 
   constructor(){
-    ;
+    varInt = 1;
+
+    varString = "Teste";
+
+    varBoolean=true;
+    varBoolean=false;
+
+    testeFloat = 1.1;
+    testeFloat = .1;
+    testeFloat = 1.2E-4;
+    testeFloat = 1.2e-4;
+    testeFloat = .2e-4;
+    testeFloat = .2E-4;
+
+    testeChar = 'a';
+    testeChar = 'A';
+    testeChar = '1';
   }
 
   constructor(int teste){
