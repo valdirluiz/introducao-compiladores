@@ -1,6 +1,6 @@
 # Compilador - Etapa de análise
 
-Implementação do analisador léxico, sintático e semântico de um compilador para a linguagem X+++ utilizando a ferramenta [javacc](https://javacc.org). 
+Implementação do analisador léxico, sintático e semântico de um compilador para a linguagem X+++ utilizando a ferramenta [javacc](https://javacc.org).
 
 ## Analisador Léxico
 
@@ -17,7 +17,7 @@ Postar todos os arquivos no moodle em um arquivo compactado (.ZIP).
 A execução do trabalho será feito em grupos e acompanhada nas aulas no laboratório, considerando a participação de todos os alunos do grupo.
 
 **Data da entrega**: 10/05 até 23:55
- 
+
 ## Geração do código
 
 Como gerar os arquivos java:
@@ -38,10 +38,9 @@ Como compilar o codigo usando o compilador gerado:
 
 ```bash
 cd  introducao-compiladores
-java parser.langX -short samples/bintree.x >> output.log
+java parser.langX [-short] [-debug_AS] samples/teste_sintatico_erro.x
+java parser.langX [-short] [-debug_AS] samples/teste_sintatico.x
 
 ```
 
 Isso ai :+1:.
- 
- 
