@@ -61,6 +61,12 @@ class Teste1 extends Teste{
     read y;
   }
 
+  //metodo que retorna matriz
+  int [] retornaVetor(int a) {
+    int  a [];
+    return a;
+  }
+
   int testaOperacoes(){
     //testa operadores booleanos
     boolean operadorBoolean;
