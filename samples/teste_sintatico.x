@@ -18,6 +18,7 @@ class Teste{
 
 class Teste1 extends Teste{
 
+
   //declaração de variaveis
   int varInt;
   string varString;
@@ -31,6 +32,7 @@ class Teste1 extends Teste{
 
   constructor(int teste){
     x = teste;
+    super(1);
   }
 
   int testaOperacoes(){
