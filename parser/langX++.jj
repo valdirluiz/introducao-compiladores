@@ -362,8 +362,8 @@ void paramlist():
 }
 {
    [
-    (<INT> |  <STRING> | <IDENT>) <IDENT> (<LBRACKET> <RBRACKET>)*
-    (<COMMA> (<INT> |  <STRING> | <IDENT>) <IDENT> (<LBRACKET> <RBRACKET>)* )*
+    (<INT> |  <STRING> | <BOOLEAN> | <CHAR> | <DOUBLE> | <IDENT>) <IDENT> (<LBRACKET> <RBRACKET>)*
+    (<COMMA> (<INT> |  <STRING> | <BOOLEAN> | <CHAR> | <DOUBLE> | <IDENT>) <IDENT> (<LBRACKET> <RBRACKET>)* )*
    ]
 }
 
@@ -543,7 +543,7 @@ void arglist():
 {
 }
 {
-    [expression() (<COMMA> expression())*]
+      [ (<float_constant> | <string_constant> | <char_constant> | expression()) (<COMMA> (<float_constant> | <string_constant> | <char_constant> | expression()))*]
 }
 
 void whilestat():

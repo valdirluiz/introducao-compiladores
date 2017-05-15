@@ -1,13 +1,26 @@
 class Teste{
 
-  int id;
+  int testInt;
+  string testString;
+  char testChar;
+  double testDouble;
+  boolean testBoolean;
+
 
   constructor(){
     ;
   }
 
-  constructor(int i){
-    id = i;
+  constructor(int a){
+    testInt = a;
+  }
+
+  constructor(int a, string b, char c, double d, boolean e){
+     testInt = a;
+     testString = b;
+     testChar = c;
+     testDouble = d;
+     testBoolean = e;
   }
 
   int getId(){
@@ -53,7 +66,7 @@ class Teste1 extends Teste{
 
   constructor(int teste){
     x = teste;
-    super(1);
+    super(1, "teste", 'a', .2e-4, true);
   }
 
   int metodoComRead(){
