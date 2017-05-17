@@ -1,7 +1,3 @@
-/*************************************************************************
-Arquivo a ser processado pelo programa JavaCC.
-
-************************************************************************/
 options {
   STATIC = false;
   DEBUG_LOOKAHEAD = true;
@@ -9,18 +5,23 @@ options {
 
 PARSER_BEGIN(langX)
 package parser;
+
 import java.io.*;
+import recovery.*;   // importa as classes de recupera��o de erros do AS
 
 
 public class langX {
 final static String Version = "X++ Compiler - Version 1.0 - 2004";
 int contParseError = 0;           // contador de erros sint�ticos
+boolean debug_recovery;   // controla verbose de recupera��o de erros
+Token lastError = null;
 
 
 // Define o m�todo "main" da classe langX.
   public  static void main(String args[]) throws ParseException
   {
-  boolean debug = false;
+  boolean debug_as = false;
+  boolean debug_recovery = false;
 
     String filename = ""; // nome do arquivo a ser analisado
     langX parser;     // analisador l�xico/sint�tico
@@ -31,11 +32,15 @@ int contParseError = 0;           // contador de erros sint�ticos
     // l� os par�metros passados para o compilador
     for (i = 0; i < args.length - 1; i++)
     {
-    if (args[i].equals("-debug_AS") )
-            debug = true;
-    else
+        if (args[i].equals("-debug_AS") )
+            debug_as = true;
+        else
+        if (args[i].equals("-debug_recovery") )
+            debug_recovery = true;
+        else
         {
-            System.out.println("Usage is: java langX [-debug_AS] inputfile");
+            System.out.println("Usage is: java langX [-debug_AS] " +
+             "[-debug_recovery] inputfile");
             System.exit(0);
         }
     }
@@ -58,15 +63,14 @@ int contParseError = 0;           // contador de erros sint�ticos
         }
     }
 
-    if (! debug) parser.disable_tracing(); // desabilita verbose do AS
-
+    parser.debug_recovery = debug_recovery;
+    if (! debug_as) parser.disable_tracing(); // desab. verbose do AS
     try {
         parser.program();   // chama o m�todo que faz a an�lise
     }
-    catch (ParseException e)
+    catch (ParseEOFException e)
     {
     System.err.println(e.getMessage());
-    parser.contParseError = 1;   // n�o existe recupera��o de erros
     }
     finally {
         System.out.println(parser.token_source.foundLexError() +
@@ -88,6 +92,53 @@ String s;
    return s;
 }
 
+
+boolean eof;    // vari�vel que indica se EOF foi alcan�ado
+// o m�todo abaixo consome tokens at� alcan�ar um que perten�a ao conjunto
+// de sincroniza��o
+
+void consumeUntil(RecoverySet g,
+                 ParseException e,
+                 String met) throws ParseEOFException,
+                                    ParseException
+{
+Token tok;
+
+   if ( debug_recovery) // informa��o sobre a recupera��o
+   {
+       System.out.println();
+       System.out.println("*** " + met + " ***");
+       System.out.println("     Syncronizing Set: " + g);
+   }
+
+   if (g == null) throw e; // se o conjunto � null, propaga a exce��o
+
+   tok = getToken(1); // pega token corrente
+   while ( ! eof )  // se n�o chegou ao fim do arquivo
+   {
+        if ( g.contains(tok.kind ) ) //achou um token no conjunto
+        {
+             if ( debug_recovery)
+               System.out.println("     Found syncronizing token: " +
+                                   im(tok.kind));
+             break;
+        }
+        if (debug_recovery)
+             System.out.println("     Ignoring token: " + im(tok.kind));
+        getNextToken();     // pega pr�ximo token
+        tok = getToken(1);
+        if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?
+            eof = true;
+    }
+   if ( tok != lastError)
+   {
+        System.out.println(e.getMessage());
+        lastError = tok;
+        contParseError++;  // incrementa n�mero de erros
+   }
+   if ( eof ) throw new ParseEOFException("EOF found prematurely.");
+}
+
 }  // langX
 
 PARSER_END(langX)
@@ -102,6 +153,7 @@ public int foundLexError()
 }
 
 }
+
 
 
 /* Espacos a serem desprezados no inicio de cada token */
