@@ -399,7 +399,9 @@ void statement():
     <BREAK> <SEMICOLON>
 |
     <SEMICOLON>
+
 }
+
 
 
 void atribstat():
@@ -428,7 +430,7 @@ void returnstat():
 {
 }
 {
-    <RETURN> [expression()]
+    <RETURN> [expression() | <string_constant> | <char_constant>]
 }
 
 

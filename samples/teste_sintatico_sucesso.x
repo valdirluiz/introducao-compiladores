@@ -101,7 +101,7 @@ class Teste1 extends Teste{
 
   int metodoComFor(){
     //teste de for
-      int i;
+    int i;
     for (i = 0; i < 10; i = i + 1){
       print "Teste\n";
       if(i==10){
@@ -122,16 +122,22 @@ class Teste1 extends Teste{
     m_3 = new string[1];
   }
 
-  int criacaoDeObjetos(){
+  string criacaoDeObjetos(){
     Teste testeCriacao;
     testeCriacao = new Teste();
     testeCriacao = new Teste(1);
 
-    //TODO: nao esta funcionando, ajustar
-    //testeCriacao.getId();
+ 
 
-    return 0;
+    //testa retornos
+    return a;
+    return false;
+    return true;
+    return 'a';
+    return "";
   }
+
+
 
   int metodoComIfElse(){
 
