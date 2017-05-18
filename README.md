@@ -40,7 +40,7 @@ Como compilar o codigo usando o compilador gerado:
 cd  introducao-compiladores
 java parser.langX [-short] [-debug_AS] samples/teste_sintatico_erro.x
 java parser.langX [-short] [-debug_AS] samples/teste_sintatico.x
-
+javac -Xlint:unchecked parser/langX.java 
 ```
 
 Isso ai :+1:.
