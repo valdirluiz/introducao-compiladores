@@ -1,13 +1,4 @@
-/*************************************************************************
-Arquivo a ser processado pelo programa JavaCC.
-Contém:
-       - descrição do analisador léxico para a linguagem X++ 
-       - descrição do analisador sintático para a linguagem X++
-       - recuperação de erros sintáticos
 
-Autor: Marcio Delamaro
-Este programa é parte do livro "Construção de compiladores usando ferra..."
-************************************************************************/
 options {
   STATIC = false;
   DEBUG_LOOKAHEAD = true;
@@ -17,29 +8,29 @@ PARSER_BEGIN(langX)
 package parser;
 
 import java.io.*;
-import recovery.*;   // importa as classes de recuperação de erros do AS
- 
+import recovery.*;   // importa as classes de recuperaï¿½ï¿½o de erros do AS
+
 
 public class langX {
 final static String Version = "X++ Compiler - Version 1.0 - 2004";
-int contParseError = 0;           // contador de erros sintáticos
-boolean debug_recovery;   // controla verbose de recuperação de erros
+int contParseError = 0;           // contador de erros sintï¿½ticos
+boolean debug_recovery;   // controla verbose de recuperaï¿½ï¿½o de erros
 Token lastError = null;
 
 
-// Define o método "main" da classe langX.  
-  public  static void main(String args[]) throws ParseException 
+// Define o mï¿½todo "main" da classe langX.
+  public  static void main(String args[]) throws ParseException
   {
   boolean debug_as = false;
   boolean debug_recovery = false;
 
     String filename = ""; // nome do arquivo a ser analisado
-    langX parser;     // analisador léxico/sintático
+    langX parser;     // analisador lï¿½xico/sintï¿½tico
     int i;
     boolean ms = false;
 
     System.out.println(Version);
-    // lê os parâmetros passados para o compilador
+    // lï¿½ os parï¿½metros passados para o compilador
     for (i = 0; i < args.length - 1; i++)
     {
         if (args[i].equals("-debug_AS") )
@@ -56,27 +47,27 @@ Token lastError = null;
     }
 
     if (args[i].equals("-"))
-    {       // lê da entrada padrão      
+    {
         System.out.println("Reading from standard input . . .");
         parser = new langX(System.in); // cria AS
      }
-     else 
-    {       // lê do arquivo
-        filename = args[args.length-1];  
+     else
+    {       // le do arquivo
+        filename = args[args.length-1];
         System.out.println("Reading from file " + filename + " . . .");
         try {  // cria AS
             parser = new langX(new java.io.FileInputStream(filename));
-        } 
+        }
     catch (java.io.FileNotFoundException e) {
                System.out.println("File " + filename + " not found.");
         return;
         }
-    } 
+    }
 
     parser.debug_recovery = debug_recovery;
     if (! debug_as) parser.disable_tracing(); // desab. verbose do AS
     try {
-        parser.program();   // chama o método que faz a análise
+        parser.program();   // chama o mï¿½todo que faz a anï¿½lise
     }
     catch (ParseEOFException e)
     {
@@ -103,9 +94,7 @@ String s;
 }
 
 
-boolean eof;    // variável que indica se EOF foi alcançado
-// o método abaixo consome tokens até alcançar um que pertença ao conjunto
-// de sincronização
+boolean eof;
 
 void consumeUntil(RecoverySet g,
                  ParseException e,
@@ -114,37 +103,37 @@ void consumeUntil(RecoverySet g,
 {
 Token tok;
 
-   if ( debug_recovery) // informação sobre a recuperação
+   if ( debug_recovery)
    {
        System.out.println();
        System.out.println("*** " + met + " ***");
        System.out.println("     Syncronizing Set: " + g);
    }
 
-   if (g == null) throw e; // se o conjunto é null, propaga a exceção
+   if (g == null) throw e;
 
-   tok = getToken(1); // pega token corrente
-   while ( ! eof )  // se não chegou ao fim do arquivo
+   tok = getToken(1);
+   while ( ! eof )
    {
         if ( g.contains(tok.kind ) ) //achou um token no conjunto
         {
              if ( debug_recovery)
-               System.out.println("     Found syncronizing token: " + 
+               System.out.println("     Found syncronizing token: " +
                                    im(tok.kind));
              break;
         }
         if (debug_recovery)
              System.out.println("     Ignoring token: " + im(tok.kind));
-        getNextToken();     // pega próximo token       
+        getNextToken();     // pega prï¿½ximo token
         tok = getToken(1);
-        if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?   
+        if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?
             eof = true;
     }
    if ( tok != lastError)
    {
         System.out.println(e.getMessage());
         lastError = tok;
-        contParseError++;  // incrementa número de erros
+        contParseError++;  // incrementa nï¿½mero de erros
    }
    if ( eof ) throw new ParseEOFException("EOF found prematurely.");
 }
@@ -203,44 +192,62 @@ SKIP :
 
 TOKEN :
 {
-  < BREAK: "break" > 
-| < CLASS: "class" >
-| < CONSTRUCTOR: "constructor" >
-| < ELSE: "else" >
-| < EXTENDS: "extends" >
-| < FOR: "for" >
-| < IF: "if" >
-| < INT: "int" >
-| < NEW: "new" >
-| < PRINT: "print" >
-| < READ: "read" >
-| < RETURN: "return" >
-| < STRING: "string" >
-| < SUPER: "super" >
+  < BREAK: ("break"){1} >
+| < CLASS: ("class"){1} >
+| < CONSTRUCTOR: ("constructor"){1} >
+| < ELSE: ("else"){1} >
+| < EXTENDS: ("extends"){1} >
+| < FOR: ("for"){1} >
+| < IF: ("if"){1} >
+| < INT: ("int"){1} >
+| < STRING: ("string"){1} >
+| < CHAR: ("char"){1} >
+| < BOOLEAN: ("boolean"){1} >
+| < AND: ("&&"){1} >
+| < OR: ("||"){1} >
+| < DOUBLE: ("double"){1} >
+| < NEW: ("new"){1} >
+| < PRINT: ("print"){1} >
+| < READ: ("read"){1} >
+| < RETURN: ("return"){1} >
+| < SUPER: ("super"){1} >
+| < WHILE: ("while"){1} >
+| < DO: ("do"){1} >
+| < SWITCH: ("switch"){1} >
+| < CASE: ("case"){1} >
+| < DEFAULT_CASE: ("default"){1} >
 }
 
 /* constantes */
 
 TOKEN :
 {
-  < int_constant:(  // números decimais, octais, hexadecimais ou binários
-                  (["0"-"9"] (["0"-"9"])* ) | 
-                  (["0"-"7"] (["0"-"7"])* ["o", "O"] ) |
-                  (["0"-"9"] (["0"-"7","A"-"F","a"-"f"])* ["h", "H"] ) |
-                  (["0"-"1"] (["0"-"1"])* ["b", "B"])
-                 ) >
+  < int_constant:((["0"-"9"] (["0"-"9"])* )) >
 |
-  < string_constant:    // constante string como "abcd bcda"
+
+< float_constant:(
+                (["0"-"9"] (["0"-"9"])* "." ["0"-"9"] (["0"-"9"])*) |
+                ("." ["0"-"9"] (["0"-"9"])*) |
+                (["0"-"9"] (["0"-"9"])* "." ["0"-"9"] (["0"-"9"])* ("e" | "E") "-" (["0"-"9"] (["0"-"9"])*)) |
+                ("." ["0"-"9"] (["0"-"9"])* ("e" | "E") "-" (["0"-"9"] (["0"-"9"])*))
+               ) >
+|
+
+  < string_constant:
       "\""( ~["\"","\n","\r"])* "\"" >
 |
-  < null_constant: "null" > // constante null
+  < boolean_constant: ("true" | "false") >
+|
+  < char_constant: "\'" (["0"-"9","A"-"Z","a"-"z"]){1} "\'" >
+|
+  < null_constant: ("null"){1} >
 }
 
 /* Identificadores */
 
 TOKEN :
 {
-  < IDENT: <LETTER> (<LETTER>|<DIGIT>)* >
+  < IDENT: <LETTER> (<LETTER>|<DIGIT> | "_")* >
 |
   < #LETTER:["A"-"Z","a"-"z"] >
 |
@@ -251,39 +258,40 @@ TOKEN :
 
 TOKEN :
 {
-  < LPAREN: "(" >
-| < RPAREN: ")" >
-| < LBRACE: "{" >
-| < RBRACE: "}" >
-| < LBRACKET: "[" >
-| < RBRACKET: "]" >
-| < SEMICOLON: ";" >
-| < COMMA: "," >
-| < DOT: "." >
+  < LPAREN: ("("){1} >
+| < RPAREN: (")"){1} >
+| < LBRACE: ("{"){1} >
+| < RBRACE: ("}"){1} >
+| < LBRACKET: ("["){1} >
+| < RBRACKET: ("]"){1} >
+| < SEMICOLON: (";"){1} >
+| < COMMA: (","){1} >
+| < DOT: ("."){1} >
+| < COLON: (":"){1} >
 }
 
 /* Operadores */
 
 TOKEN :
 {
-  < ASSIGN: "=" >
-| < GT: ">" >
-| < LT: "<" >
-| < EQ: "==" >
-| < LE: "<=" >
-| < GE: ">=" >
-| < NEQ: "!=" >
-| < PLUS: "+" >
-| < MINUS: "-" >
-| < STAR: "*" >
-| < SLASH: "/" >
-| < REM: "%" >
+  < ASSIGN: ("="){1} >
+| < GT: (">"){1} >
+| < LT: ("<"){1} >
+| < EQ: ("=="){1} >
+| < LE: ("<="){1} >
+| < GE: (">="){1} >
+| < NEQ: ("!="){1} >
+| < PLUS: ("+"){1} >
+| < MINUS: ("-"){1} >
+| < STAR: ("*"){1} >
+| < SLASH: ("/"){1} >
+| < REM: ("%"){1} >
 }
 
-/* Trata os erros léxicos */
+/* Trata os erros lexicos */
 SPECIAL_TOKEN :
 {
-<INVALID_LEXICAL: 
+<INVALID_LEXICAL:
 (~ ["a"-"z", "A"-"Z",
   "0"-"9",
   "\"",
@@ -305,6 +313,8 @@ SPECIAL_TOKEN :
   "*",
   "/",
   "%",
+  ":",
+  "_",
   " ",
   "\t",
   "\n",
@@ -312,15 +322,15 @@ SPECIAL_TOKEN :
   "\f"
 ])+>
    {
-    System.err.println("Line " + input_stream.getEndLine() + 
+    System.err.println("Line " + input_stream.getEndLine() +
                            " - Invalid string found: " + image);
     countLexError++;
    }
 |
-   <INVALID_CONST: 
+   <INVALID_CONST:
    "\"" (~ ["\n","\r","\""])* ["\n","\r"]>
    {
-    System.err.println("Line " + input_stream.getEndLine() + 
+    System.err.println("Line " + input_stream.getEndLine() +
                            " - String constant has a \\n: " + image);
     countLexError++;
    }
@@ -333,12 +343,12 @@ void program() throws ParseEOFException :
 {
 RecoverySet g = First.program;
 }
-{ 
-    <EOF> 
+{
+    <EOF>
 |
-    classlist(g) 
-    try { 
-      <EOF> 
+    classlist(g)
+    try {
+      <EOF>
     }
     catch (ParseException e)
     {
@@ -396,9 +406,9 @@ void vardecl(RecoverySet g) throws ParseEOFException :
 }
 {
 try {
-   (<INT> |  <STRING> | <IDENT> )
-   <IDENT> ( <LBRACKET> <RBRACKET>)*
-  (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )*
+  (<INT> |  <STRING> | <DOUBLE> | <BOOLEAN> | <CHAR> | <IDENT> )
+  <IDENT> ( <LBRACKET> <RBRACKET>)*
+ (<COMMA> <IDENT> ( <LBRACKET> <RBRACKET>)* )*
 }
 catch (ParseException e)
 {
@@ -472,12 +482,12 @@ RecoverySet f2 = new RecoverySet(RBRACE).union(g).remove(IDENT);
 {
 try {
     LOOKAHEAD(<IDENT> <IDENT>)
-    vardecl(f1) <SEMICOLON> 
+    vardecl(f1) <SEMICOLON>
 |
     LOOKAHEAD(1)
     atribstat(f1) <SEMICOLON>
 |
-    vardecl(f1) <SEMICOLON> 
+    vardecl(f1) <SEMICOLON>
 |
     printstat(f1) <SEMICOLON>
 |
@@ -523,7 +533,7 @@ void printstat(RecoverySet g) throws ParseEOFException :
 }
 {
 try {
-    <PRINT> expression(g)
+    <PRINT> (expression(g))
 }
 catch (ParseException e)
 {
@@ -550,7 +560,7 @@ void returnstat(RecoverySet g) throws ParseEOFException :
 }
 {
 try {
-    <RETURN> [expression(g)]
+    <RETURN> [LOOKAHEAD(2) expression(g) | <string_constant> | <char_constant>]
 }
 catch (ParseException e)
 {
@@ -614,7 +624,7 @@ void  statlist(RecoverySet g) throws ParseEOFException :
 RecoverySet f = First.statlist.remove(IDENT).union(g);
 }
 {
-   statement(f) [ statlist(g)] 
+   statement(f) [ statlist(g)]
 }
 
 void lvalue(RecoverySet g) throws ParseEOFException :
@@ -624,7 +634,7 @@ void lvalue(RecoverySet g) throws ParseEOFException :
 try {
    <IDENT> (
            <LBRACKET> expression(null) <RBRACKET> |
-           <DOT> <IDENT> [<LPAREN> arglist(null) <RPAREN>]
+           <DOT> <IDENT> [LOOKAHEAD(2)<LPAREN> arglist(null) <RPAREN>]
          )*
 }
 catch (ParseException e)
@@ -643,7 +653,7 @@ RecoverySet f1 = new RecoverySet(RPAREN).union(g),
 {
     <NEW> (
              LOOKAHEAD(2) <IDENT> <LPAREN> arglist(f1) <RPAREN> |
-             ( <INT> | <STRING> | <IDENT> )
+             ( <INT> | <STRING> | <BOOLEAN> | <CHAR> |<IDENT> )
              (<LBRACKET> expression(f2) <RBRACKET>)+
           )
 }
@@ -663,11 +673,12 @@ catch (ParseException e)
 }
 
 
+
 void numexpr() throws ParseEOFException :
 {
 }
 {
-    term() ((<PLUS> | <MINUS>) term())*
+      term() (LOOKAHEAD(2)(<PLUS> | <MINUS>) term())*
 }
 
 void term() throws ParseEOFException :
@@ -688,10 +699,10 @@ void unaryexpr() throws ParseEOFException :
 void factor() throws ParseEOFException :
 {
 }
-{    
-    ( 
-       <int_constant> | 
-       <string_constant> | 
+{
+    (
+       <int_constant> |
+       <string_constant> |
        <null_constant> |
        lvalue(null) |
        <LPAREN> expression(null) <RPAREN>
