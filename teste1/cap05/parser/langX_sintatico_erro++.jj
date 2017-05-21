@@ -501,6 +501,12 @@ try {
 |
     forstat(g)
 |
+    whilestat(g)
+|
+    doWhileStat(g)
+|
+    switchStat(g)
+|
     <LBRACE> statlist(f2) <RBRACE>
 |
     <BREAK> <SEMICOLON>
@@ -714,5 +720,38 @@ void arglist(RecoverySet g) throws ParseEOFException :
 RecoverySet f =  new RecoverySet(COMMA).union(g);
 }
 {
-    [expression(f) (<COMMA> expression(f))*]
+    [ (<float_constant> | <char_constant> | expression(f)) (<COMMA> (<float_constant> | <char_constant> | expression(f)))*]
+}
+
+void whilestat(RecoverySet g)  throws ParseEOFException :
+{
+  RecoverySet f1 = new RecoverySet(RPAREN).union(g);
+}
+{
+    <WHILE> <LPAREN> expression(f1) <RPAREN>  statement(g)
+}
+
+void doWhileStat(RecoverySet g) throws ParseEOFException :
+{
+    RecoverySet f1 = new RecoverySet(RPAREN).union(g);
+}
+{
+    <DO> statement(g) <LPAREN> expression(f1) <RPAREN>
+}
+
+void switchStat(RecoverySet g) throws ParseEOFException :
+{
+}
+{
+    <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> switchCaseStat(g) (switchCaseStat(g))+  <RBRACE>
+}
+
+
+
+void switchCaseStat(RecoverySet g) throws ParseEOFException :
+{
+}
+{
+     (<CASE> factor() | <DEFAULT_CASE>) <COLON> statement(g)
+
 }
