@@ -31,16 +31,15 @@ Como compilar os arquivos:
 
 ```bash
 cd introducao-compiladores
-javac parser/langX.java
+javac [-Xlint:unchecked] parser/langX.java
 ```
 
 Como compilar o codigo usando o compilador gerado:
 
 ```bash
 cd  introducao-compiladores
-java parser.langX [-short] [-debug_AS] samples/teste_sintatico_erro.x
-java parser.langX [-short] [-debug_AS] samples/teste_sintatico.x
-javac -Xlint:unchecked parser/langX.java 
+java parser.langX [-short] [-debug_AS] [-debug_recovery] samples/teste_sintatico_erro.x
+java parser.langX [-short] [-debug_AS] [-debug_recovery] samples/teste_sintatico.x
 ```
 
 Isso ai :+1:.
