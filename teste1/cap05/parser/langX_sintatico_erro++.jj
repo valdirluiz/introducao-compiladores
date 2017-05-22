@@ -435,8 +435,8 @@ void methoddecl(RecoverySet g) throws ParseEOFException :
 }
 {
 try {
-   (<INT> |  <STRING> | <IDENT> ) (<LBRACKET> <RBRACKET>)*
-   <IDENT> methodbody(g)
+  (<BOOLEAN> | <CHAR> | <INT> |  <STRING> | <IDENT> ) (<LBRACKET> <RBRACKET>)*
+  <IDENT> methodbody(g)
 }
 catch (ParseException e)
 {
@@ -464,9 +464,9 @@ void paramlist(RecoverySet g) throws ParseEOFException :
 {
 try {
    [
-    (<INT> |  <STRING> | <IDENT>) <IDENT> (<LBRACKET> <RBRACKET>)*
-    (<COMMA> (<INT> |  <STRING> | <IDENT>) <IDENT> (<LBRACKET> <RBRACKET>)* )*
-   ]
+    (<INT> |  <STRING> | <BOOLEAN> | <CHAR> | <DOUBLE> | <IDENT>) <IDENT> (<LBRACKET> <RBRACKET>)*
+    (<COMMA> (<INT> |  <STRING> | <BOOLEAN> | <CHAR> | <DOUBLE> | <IDENT>) <IDENT> (<LBRACKET> <RBRACKET>)* )*
+    ]
 }
 catch (ParseException e)
 {
@@ -526,7 +526,7 @@ RecoverySet f1 = new RecoverySet(ASSIGN).union(g);
 }
 {
 try {
-    lvalue(f1) <ASSIGN> ( alocexpression(g) | expression(g))
+    lvalue(f1) <ASSIGN> ( alocexpression(g) | expression(g) | <float_constant> | <char_constant> | <string_constant>)
 }
 catch (ParseException e)
 {
@@ -539,7 +539,7 @@ void printstat(RecoverySet g) throws ParseEOFException :
 }
 {
 try {
-    <PRINT> (expression(g))
+    <PRINT> (expression(g) | <string_constant>)
 }
 catch (ParseException e)
 {
@@ -566,7 +566,7 @@ void returnstat(RecoverySet g) throws ParseEOFException :
 }
 {
 try {
-    <RETURN> [LOOKAHEAD(2) expression(g) | <string_constant> | <char_constant>]
+    <RETURN> [expression(g) | <string_constant> | <char_constant>]
 }
 catch (ParseException e)
 {
@@ -670,7 +670,7 @@ void expression(RecoverySet g) throws ParseEOFException :
 }
 {
 try {
-    numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]
+    ((bolleanExpression() | <boolean_constant>) ((<AND> | <OR>) (bolleanExpression() | <boolean_constant>))*)+
 }
 catch (ParseException e)
 {
@@ -678,6 +678,12 @@ catch (ParseException e)
 }
 }
 
+void bolleanExpression() throws ParseEOFException :
+{
+}
+{
+  numexpr() [( <LT> | <GT> | <LE> | <GE> | <EQ> | <NEQ>) numexpr()]
+}
 
 
 void numexpr() throws ParseEOFException :
@@ -706,13 +712,10 @@ void factor() throws ParseEOFException :
 {
 }
 {
-    (
-       <int_constant> |
-       <string_constant> |
-       <null_constant> |
-       lvalue(null) |
-       <LPAREN> expression(null) <RPAREN>
-    )
+  (
+     <int_constant> |
+     lvalue(null) |
+<LPAREN> expression(null) <RPAREN>)
 }
 
 void arglist(RecoverySet g) throws ParseEOFException :
@@ -720,7 +723,7 @@ void arglist(RecoverySet g) throws ParseEOFException :
 RecoverySet f =  new RecoverySet(COMMA).union(g);
 }
 {
-    [ (<float_constant> | <char_constant> | expression(f)) (<COMMA> (<float_constant> | <char_constant> | expression(f)))*]
+    [ (<float_constant> | <string_constant> | <char_constant> | expression(f)) (<COMMA> (<float_constant> | <string_constant> | <char_constant> | expression(f)))*]
 }
 
 void whilestat(RecoverySet g)  throws ParseEOFException :
