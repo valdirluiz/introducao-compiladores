@@ -17,11 +17,19 @@ public class First { //implementa os conjuntos first p/ alguns n.terminais
     static {
         methoddecl.add(new Integer(langXConstants.INT));
         methoddecl.add(new Integer(langXConstants.STRING));
+        methoddecl.add(new Integer(langXConstants.DOUBLE));
+        methoddecl.add(new Integer(langXConstants.CHAR));
+        methoddecl.add(new Integer(langXConstants.BOOLEAN));
         methoddecl.add(new Integer(langXConstants.IDENT));
 
         vardecl.add(new Integer(langXConstants.INT));
         vardecl.add(new Integer(langXConstants.STRING));
+        vardecl.add(new Integer(langXConstants.DOUBLE));
+        vardecl.add(new Integer(langXConstants.CHAR));
+        vardecl.add(new Integer(langXConstants.BOOLEAN));
         vardecl.add(new Integer(langXConstants.IDENT));
+
+      
 
         classlist.add(new Integer(langXConstants.CLASS));
 

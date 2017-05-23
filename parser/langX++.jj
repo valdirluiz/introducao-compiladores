@@ -435,7 +435,7 @@ void methoddecl(RecoverySet g) throws ParseEOFException :
 }
 {
 try {
-  (<BOOLEAN> | <CHAR> | <INT> |  <STRING> | <IDENT> ) (<LBRACKET> <RBRACKET>)*
+  (<BOOLEAN> | <DOUBLE> | <CHAR> | <INT> |  <STRING> | <IDENT> ) (<LBRACKET> <RBRACKET>)*
   <IDENT> methodbody(g)
 }
 catch (ParseException e)
