@@ -3,13 +3,13 @@
 package parser;
 
 import java.io.*;
-import recovery.*;   // importa as classes de recupera��o de erros do AS
+import recovery.*;
 
 
 public class langX implements langXConstants {
 final static String Version = "X++ Compiler - Version 1.0 - 2004";
-int contParseError = 0;           // contador de erros sint�ticos
-boolean debug_recovery;   // controla verbose de recupera��o de erros
+int contParseError = 0;
+boolean debug_recovery;
 Token lastError = null;
 
 
@@ -1460,28 +1460,32 @@ consumeUntil(g, e, "expression");
 
   final public void switchStat(RecoverySet g) throws ParseException, ParseEOFException {
     trace_call("switchStat");
-    try {
-      jj_consume_token(SWITCH);
-      jj_consume_token(LPAREN);
-      jj_consume_token(IDENT);
-      jj_consume_token(RPAREN);
-      jj_consume_token(LBRACE);
-      switchCaseStat(g);
-      label_18:
-      while (true) {
+    try {RecoverySet f1 = new RecoverySet(RBRACE).union(g);
+      try {
+        jj_consume_token(SWITCH);
+        jj_consume_token(LPAREN);
+        jj_consume_token(IDENT);
+        jj_consume_token(RPAREN);
+        jj_consume_token(LBRACE);
         switchCaseStat(g);
-        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-        case CASE:
-        case DEFAULT_CASE:{
-          ;
-          break;
+        label_18:
+        while (true) {
+          switchCaseStat(f1);
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case CASE:
+          case DEFAULT_CASE:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[51] = jj_gen;
+            break label_18;
           }
-        default:
-          jj_la1[51] = jj_gen;
-          break label_18;
         }
+        jj_consume_token(RBRACE);
+      } catch (ParseException e) {
+consumeUntil(g, e, "switchStat");
       }
-      jj_consume_token(RBRACE);
     } finally {
       trace_return("switchStat");
     }
@@ -1490,23 +1494,27 @@ consumeUntil(g, e, "expression");
   final public void switchCaseStat(RecoverySet g) throws ParseException, ParseEOFException {
     trace_call("switchCaseStat");
     try {
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case CASE:{
-        jj_consume_token(CASE);
-        factor();
-        break;
+      try {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case CASE:{
+          jj_consume_token(CASE);
+          factor();
+          break;
+          }
+        case DEFAULT_CASE:{
+          jj_consume_token(DEFAULT_CASE);
+          break;
+          }
+        default:
+          jj_la1[52] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
         }
-      case DEFAULT_CASE:{
-        jj_consume_token(DEFAULT_CASE);
-        break;
-        }
-      default:
-        jj_la1[52] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+        jj_consume_token(COLON);
+        statement(g);
+      } catch (ParseException e) {
+consumeUntil(g, e, "switchCaseStat");
       }
-      jj_consume_token(COLON);
-      statement(g);
     } finally {
       trace_return("switchCaseStat");
     }

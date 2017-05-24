@@ -28,7 +28,10 @@ public class First { //implementa os conjuntos first p/ alguns n.terminais
         constructdecl.add(new Integer(langXConstants.CONSTRUCTOR));
 
         statlist.addAll(vardecl);
-        statlist.add(new Integer(langXConstants.IDENT)); // first do atribstat
+        statlist.add(new Integer(langXConstants.WHILE));
+        statlist.add(new Integer(langXConstants.SWITCH));
+        statlist.add(new Integer(langXConstants.DO));
+        statlist.add(new Integer(langXConstants.IDENT));
         statlist.add(new Integer(langXConstants.PRINT));
         statlist.add(new Integer(langXConstants.READ));
         statlist.add(new Integer(langXConstants.RETURN));
