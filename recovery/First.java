@@ -5,7 +5,7 @@ import parser.*;
 import java.util.*;
 
 
-public class First { //implementa os conjuntos first p/ alguns n.terminais
+public class First {  
 
     static public final RecoverySet methoddecl = new RecoverySet();
     static public final RecoverySet vardecl = new RecoverySet();
@@ -15,6 +15,7 @@ public class First { //implementa os conjuntos first p/ alguns n.terminais
     static public final RecoverySet program = classlist;
 
     static {
+
         methoddecl.add(new Integer(langXConstants.INT));
         methoddecl.add(new Integer(langXConstants.STRING));
         methoddecl.add(new Integer(langXConstants.DOUBLE));
@@ -29,7 +30,7 @@ public class First { //implementa os conjuntos first p/ alguns n.terminais
         vardecl.add(new Integer(langXConstants.BOOLEAN));
         vardecl.add(new Integer(langXConstants.IDENT));
 
-      
+
 
         classlist.add(new Integer(langXConstants.CLASS));
 
