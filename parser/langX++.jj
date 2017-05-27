@@ -635,17 +635,18 @@ catch (ParseException e)
 PrintNode printstat(RecoverySet g) throws ParseEOFException :
 {
 ExpreNode e1 = null;
-Token t = null;
+Token t1 = null;
+Token t2 = null;
 }
 {
 try {
-    t = <PRINT> e1 = expression(g)
-      { return new PrintNode(t, e1); }
+    t1 = <PRINT> (e1 = expression(g) | t2 = <string_constant>)
+      { return new PrintNode(t1, e1, t2); }
 }
 catch (ParseException e)
 {
    consumeUntil(g, e, "printstat");
-   return new PrintNode(t, e1);
+   return new PrintNode(t1, e1, t2);
 }
 }
 
@@ -716,7 +717,7 @@ RecoverySet f1 = new RecoverySet(RPAREN).union(g),
 }
 {
 try {
-    t = <IF> <LPAREN> e1 = expression(f1) <RPAREN> s1 = statement(f2)
+    t = <IF> <LPAREN> ((e1 = expression(f1)) ((<AND> | <OR>) expression(f1) )* )  <RPAREN> s1 = statement(f2)
     [LOOKAHEAD(1) <ELSE> s2 = statement(g)]
      { return new IfNode(t, e1, s1, s2); }
 }
@@ -905,9 +906,7 @@ Token t;
     (
        t = <int_constant> { e = new IntConstNode(t); }
     |
-       t = <string_constant> { e = new StringConstNode(t); }
-    |
-       t = <null_constant> { e = new NullConstNode(t); }
+       t = <boolean_constant> {e = new BooleanConstNode(t); }
     |
        e = lvalue(null)
     |
