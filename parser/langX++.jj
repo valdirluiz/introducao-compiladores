@@ -498,7 +498,7 @@ MethodBodyNode m = null;
 }
 {
 try {
-   ( t1 = <INT> |  t1 = <STRING> | t1 = <IDENT> )
+   ( t1 = <BOOLEAN> | t1 = <DOUBLE> | t1 = <CHAR> | t1 = <INT> | t1 =  <STRING> | t1 = <IDENT> )
    (<LBRACKET> <RBRACKET> { k++; } )*
    t2 = <IDENT> m = methodbody(g)
       { return new MethodDeclNode(t1, k, t2, m); }
