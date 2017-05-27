@@ -1,5 +1,13 @@
 class Teste{
 
+
+class data { // define um classe aninhada do tipo data (dia, mes ano)
+  int dia, mes, ano;
+
+
+
+} // final classe data
+
   int testInt;
   string testString;
   char testChar;
@@ -21,6 +29,26 @@ class Teste{
      testChar = c;
      testDouble = d;
      testBoolean = e;
+  }
+
+  double metodoDouble(){
+    ;
+  }
+
+  char metodoChar(){
+    ;
+  }
+
+  string metodoString(){
+    ;
+  }
+
+  boolean metodoBoolean(){
+    ;
+  }
+
+  Pessoa metodoObjeto(){
+    ;
   }
 
   int getId(){
@@ -127,7 +155,7 @@ class Teste1 extends Teste{
     testeCriacao = new Teste();
     testeCriacao = new Teste(1);
 
- 
+
 
     //testa retornos
     return a;

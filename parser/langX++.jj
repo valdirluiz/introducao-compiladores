@@ -731,7 +731,11 @@ void whilestat(RecoverySet g)  throws ParseEOFException :
   RecoverySet f1 = new RecoverySet(RPAREN).union(g);
 }
 {
-    <WHILE> <LPAREN> expression(f1) <RPAREN>  statement(g)
+    try {
+      <WHILE> <LPAREN> expression(f1) <RPAREN>  statement(g)
+    } catch (ParseException e) {
+		consumeUntil(g, e, "whilestat");
+	}
 }
 
 void doWhileStat(RecoverySet g) throws ParseEOFException :
@@ -761,7 +765,7 @@ void switchCaseStat(RecoverySet g) throws ParseEOFException :
 }
 {
     try {
-      (<CASE> factor() | <DEFAULT_CASE>) <COLON> statement(g)
+      (<CASE> factor() | <DEFAULT_CASE>) <COLON> (statement(g))+
     } catch (ParseException e) {
 		    consumeUntil(g, e, "switchCaseStat");
     }
