@@ -540,13 +540,13 @@ Token t2 = null;
 {
 try {
    [
-    ( t1 = <INT> |  t1 = <STRING> | t1 = <IDENT>) t2 = <IDENT>
+    ( t1 = <INT> |  t1 = <STRING> | t1 = <BOOLEAN> | t1 = <CHAR> | t1 = <DOUBLE> | t1 = <IDENT>) t2 = <IDENT>
     (<LBRACKET> <RBRACKET> { k++; } )*
        {
          q = new ListNode(new VarNode(t2, k));
      p = new ListNode(new VarDeclNode(t1, q));
        }
-    (   <COMMA> {k = 0;}  ( t1 = <INT> |  t1 = <STRING> | t1 = <IDENT>)
+    (   <COMMA> {k = 0;}  ( t1 = <INT> |  t1 = <STRING> | t1 = <BOOLEAN> | t1 = <CHAR> | t1 = <DOUBLE> | t1 = <IDENT>)
         t2= <IDENT> (<LBRACKET> <RBRACKET> {k ++;} )*
        {
          q = new ListNode(new VarNode(t2, k));
