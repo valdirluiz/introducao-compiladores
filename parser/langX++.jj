@@ -8,18 +8,18 @@ PARSER_BEGIN(langX)
 package parser;
 
 import java.io.*;
-import recovery.*;   // importa as classes de recupera��o de erros do AS
-import syntacticTree.*; // importa as classes dos n�s da �rvore sint�tica
+import recovery.*;
+import syntacticTree.*;
 
 
 public class langX {
 final static String Version = "X++ Compiler - Version 1.0 - 2004";
-int contParseError = 0;           // contador de erros sint�ticos
-boolean debug_recovery;   // controla verbose de recupera��o de erros
+int contParseError = 0;
+boolean debug_recovery;
 Token lastError = null;
 
 
-// Define o m�todo "main" da classe langX.
+
   public  static void main(String args[]) throws ParseException
   {
   boolean debug_as = false;
@@ -48,12 +48,12 @@ Token lastError = null;
     }
 
     if (args[i].equals("-"))
-    {       // l� da entrada padr�o
+    {
         System.out.println("Reading from standard input . . .");
         parser = new langX(System.in); // cria AS
      }
      else
-    {       // l� do arquivo
+    {
         filename = args[args.length-1];
         System.out.println("Reading from file " + filename + " . . .");
         try {  // cria AS
@@ -67,9 +67,9 @@ Token lastError = null;
 
     ListNode root = null;
     parser.debug_recovery = debug_recovery;
-    if (! debug_as) parser.disable_tracing(); // desab. verbose do AS
+    if (! debug_as) parser.disable_tracing();
     try {
-        root = parser.program();   // chama o m�todo que faz a an�lise
+        root = parser.program();
     }
     catch (ParseEOFException e)
     {
@@ -456,7 +456,7 @@ ListNode l = null;
 }
 {
 try {
-   ( t1 = <INT> |  t1 = <STRING> | t1 = <IDENT> )
+   ( t1 = <INT> |  t1 = <STRING> | t1 = <DOUBLE> | t1 = <BOOLEAN> | t1 = <CHAR> | t1 = <IDENT> )
    t2 = <IDENT> ( <LBRACKET> <RBRACKET> { k++; } )*
      { l = new ListNode(new VarNode(t2, k)); }
    (<COMMA> { k = 0; }  t2 = <IDENT> ( <LBRACKET> <RBRACKET> { k++; })*

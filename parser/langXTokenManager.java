@@ -3,7 +3,6 @@
 package parser;
 import java.io.*;
 import recovery.*;
-                     // importa as classes de recupera��o de erros do AS
 import syntacticTree.*;
 
 /** Token Manager. */

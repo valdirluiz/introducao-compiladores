@@ -3,18 +3,18 @@
 package parser;
 
 import java.io.*;
-import recovery.*;   // importa as classes de recupera��o de erros do AS
-import syntacticTree.*; // importa as classes dos n�s da �rvore sint�tica
+import recovery.*;
+import syntacticTree.*;
 
 
 public class langX implements langXConstants {
 final static String Version = "X++ Compiler - Version 1.0 - 2004";
-int contParseError = 0;           // contador de erros sint�ticos
-boolean debug_recovery;   // controla verbose de recupera��o de erros
+int contParseError = 0;
+boolean debug_recovery;
 Token lastError = null;
 
 
-// Define o m�todo "main" da classe langX.
+
   public  static void main(String args[]) throws ParseException
   {
   boolean debug_as = false;
@@ -43,12 +43,12 @@ Token lastError = null;
     }
 
     if (args[i].equals("-"))
-    {       // l� da entrada padr�o
+    {
         System.out.println("Reading from standard input . . .");
         parser = new langX(System.in); // cria AS
      }
      else
-    {       // l� do arquivo
+    {
         filename = args[args.length-1];
         System.out.println("Reading from file " + filename + " . . .");
         try {  // cria AS
@@ -62,9 +62,9 @@ Token lastError = null;
 
     ListNode root = null;
     parser.debug_recovery = debug_recovery;
-    if (! debug_as) parser.disable_tracing(); // desab. verbose do AS
+    if (! debug_as) parser.disable_tracing();
     try {
-        root = parser.program();   // chama o m�todo que faz a an�lise
+        root = parser.program();
     }
     catch (ParseEOFException e)
     {
@@ -333,6 +333,18 @@ ListNode l = null;
           }
         case STRING:{
           t1 = jj_consume_token(STRING);
+          break;
+          }
+        case DOUBLE:{
+          t1 = jj_consume_token(DOUBLE);
+          break;
+          }
+        case BOOLEAN:{
+          t1 = jj_consume_token(BOOLEAN);
+          break;
+          }
+        case CHAR:{
+          t1 = jj_consume_token(CHAR);
           break;
           }
         case IDENT:{
@@ -631,7 +643,10 @@ RecoverySet f2 = new RecoverySet(RBRACE).union(g).remove(IDENT);
             break;
             }
           case INT:
-          case STRING:{
+          case STRING:
+          case CHAR:
+          case BOOLEAN:
+          case DOUBLE:{
             s = vardecl(f1);
             jj_consume_token(SEMICOLON);
             break;
@@ -939,6 +954,9 @@ RecoverySet f = First.statlist.remove(IDENT).union(g);
       case IF:
       case INT:
       case STRING:
+      case CHAR:
+      case BOOLEAN:
+      case DOUBLE:
       case PRINT:
       case READ:
       case RETURN:
@@ -1425,7 +1443,16 @@ l.add(e);
     jj_scanpos = xsp;
     if (jj_scan_token(20)) {
     jj_scanpos = xsp;
+    if (jj_scan_token(25)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(22)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(21)) {
+    jj_scanpos = xsp;
     if (jj_scan_token(42)) { if (!jj_rescan) trace_return("vardecl(LOOKAHEAD FAILED)"); return true; }
+    }
+    }
+    }
     }
     }
     if (jj_scan_token(IDENT)) { if (!jj_rescan) trace_return("vardecl(LOOKAHEAD FAILED)"); return true; }
@@ -1488,7 +1515,7 @@ l.add(e);
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x2001,0x2001,0x2000,0x10000,0x2000,0x4000,0x180000,0x180000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x180000,0x0,0x180000,0x781e1000,0x4000000,0x0,0x8000,0x0,0x0,0x0,0x781e1000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x2001,0x2001,0x2000,0x10000,0x2000,0x4000,0x180000,0x2780000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x180000,0x0,0x180000,0x7a7e1000,0x4000000,0x0,0x8000,0x0,0x0,0x0,0x7a7e1000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x400,0x20000,0x100000,0x20000,0x400,0x20000,0x400,0x20000,0x100000,0x400,0x20000,0x400,0x88400,0xc0002650,0xc0002650,0x0,0x400,0xc0002650,0x400,0x88400,0x220000,0x20000,0x200000,0x400,0x20000,0x400,0x3f000000,0x3f000000,0xc0000000,0xc0000000,0x0,0x0,0xc0000000,0xc0000000,0x2650,0x100000,0xc0002650,};
