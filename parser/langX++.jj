@@ -928,13 +928,22 @@ ExpreNode e = null;
 RecoverySet f =  new RecoverySet(COMMA).union(g);
 }
 {
-    [
-       e = expression(f)
+
+      [ (
+            <float_constant>
+          | <string_constant>
+          | <char_constant>
+          | e = expression(f)
           { l = new ListNode(e); }
-       (<COMMA> e = expression(f)
-          { l.add(e);}
-       )*
-    ]
+         )
+          (<COMMA> (
+                      <float_constant>
+                      | <string_constant>
+                      | <char_constant>
+                      | e = expression(f)   { l.add(e);}
+                    )
+         )*]
+
     { return l;}
 }
 
