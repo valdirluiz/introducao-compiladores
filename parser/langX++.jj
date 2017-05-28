@@ -676,17 +676,18 @@ catch (ParseException e)
 ReturnNode returnstat(RecoverySet g) throws ParseEOFException :
 {
 ExpreNode e1 = null;
-Token t = null;
+Token t1 = null;
+Token t2 = null;
 }
 {
 try {
-    t = <RETURN> [ e1 = expression(g)]
-      { return new ReturnNode(t, e1); }
+    t1 = <RETURN> [ e1 = expression(g) | t2 = <string_constant> | t2 = <char_constant>]
+      { return new ReturnNode(t1, e1, t2); }
 }
 catch (ParseException e)
 {
    consumeUntil(g, e, "returnstat");
-   return new ReturnNode(t, e1);
+   return new ReturnNode(t1, e1, t2);
 }
 }
 
