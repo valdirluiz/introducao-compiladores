@@ -933,6 +933,7 @@ consumeUntil(g, e, "superstat");
 StatementNode s1 = null,
               s2 = null;
 Token t = null;
+ListNode l = null;
 
 RecoverySet f1 = new RecoverySet(RPAREN).union(g),
             f2 = new RecoverySet(ELSE).union(g);
@@ -940,6 +941,7 @@ RecoverySet f1 = new RecoverySet(RPAREN).union(g),
         t = jj_consume_token(IF);
         jj_consume_token(LPAREN);
         e1 = expression(f1);
+if(l==null) l = new ListNode(e1); else l.add(e1);
         label_11:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -966,7 +968,8 @@ RecoverySet f1 = new RecoverySet(RPAREN).union(g),
             jj_consume_token(-1);
             throw new ParseException();
           }
-          expression(f1);
+          e1 = expression(f1);
+l.add(e1);
         }
         jj_consume_token(RPAREN);
         s1 = statement(f2);
@@ -980,10 +983,10 @@ RecoverySet f1 = new RecoverySet(RPAREN).union(g),
           jj_la1[25] = jj_gen;
           ;
         }
-{if ("" != null) return new IfNode(t, e1, s1, s2);}
+{if ("" != null) return new IfNode(t, l, s1, s2);}
       } catch (ParseException e) {
 consumeUntil(g, e, "ifstat");
-   {if ("" != null) return new IfNode(t, e1, s1, s2);}
+   {if ("" != null) return new IfNode(t, l, s1, s2);}
       }
     throw new Error("Missing return statement in function");
     } finally {
@@ -1742,17 +1745,17 @@ consumeUntil(g, e, "switchCaseStat");
     return false;
   }
 
-  private boolean jj_3R_22()
- {
-    if (jj_scan_token(COMMA)) return true;
-    return false;
-  }
-
   private boolean jj_3_3()
  {
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENT)) return true;
     if (jj_scan_token(LPAREN)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_22()
+ {
+    if (jj_scan_token(COMMA)) return true;
     return false;
   }
 

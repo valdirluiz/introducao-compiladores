@@ -716,20 +716,21 @@ ExpreNode e1 = null;
 StatementNode s1 = null,
               s2 = null;
 Token t = null;
+ListNode l = null;
 
 RecoverySet f1 = new RecoverySet(RPAREN).union(g),
             f2 = new RecoverySet(ELSE).union(g);
 }
 {
 try {
-    t = <IF> <LPAREN> ((e1 = expression(f1)) ((<AND> | <OR>) expression(f1) )* )  <RPAREN> s1 = statement(f2)
+    t = <IF> <LPAREN> ( (e1 = expression(f1) { if(l==null) l = new ListNode(e1); else l.add(e1);} ) ((<AND> | <OR>) e1 = expression(f1) {l.add(e1);} )* )  <RPAREN> s1 = statement(f2)
     [LOOKAHEAD(1) <ELSE> s2 = statement(g)]
-     { return new IfNode(t, e1, s1, s2); }
+     { return new IfNode(t, l, s1, s2); }
 }
 catch (ParseException e)
 {
    consumeUntil(g, e, "ifstat");
-   return new IfNode(t, e1, s1, s2);
+   return new IfNode(t, l, s1, s2);
 }
 }
 
