@@ -729,6 +729,10 @@ RecoverySet f2 = new RecoverySet(RBRACE).union(g).remove(IDENT);
             s = doWhileStat(g);
             break;
             }
+          case SWITCH:{
+            s = switchStat(g);
+            break;
+            }
           case LBRACE:{
             t1 = jj_consume_token(LBRACE);
             l = statlist(f2);
@@ -1069,6 +1073,7 @@ RecoverySet f = First.statlist.remove(IDENT).union(g);
       case SUPER:
       case WHILE:
       case DO:
+      case SWITCH:
       case IDENT:
       case LBRACE:
       case SEMICOLON:{
@@ -1524,6 +1529,34 @@ consumeUntil(g, e, "whilestat");
         s1 = statement(g);
         jj_consume_token(LPAREN);
         e1 = expression(f1);
+        label_17:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case AND:
+          case OR:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[47] = jj_gen;
+            break label_17;
+          }
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case AND:{
+            jj_consume_token(AND);
+            break;
+            }
+          case OR:{
+            jj_consume_token(OR);
+            break;
+            }
+          default:
+            jj_la1[48] = jj_gen;
+            jj_consume_token(-1);
+            throw new ParseException();
+          }
+          expression(f1);
+        }
         jj_consume_token(RPAREN);
 {if ("" != null) return new DoWhileNode(t1, s1, e1);}
       } catch (ParseException e) {
@@ -1533,6 +1566,101 @@ consumeUntil(g, e, "doWhileStat");
     throw new Error("Missing return statement in function");
     } finally {
       trace_return("doWhileStat");
+    }
+  }
+
+  final public SwitchNode switchStat(RecoverySet g) throws ParseException, ParseEOFException {
+    trace_call("switchStat");
+    try {RecoverySet f1 = new RecoverySet(RBRACE).union(g);
+  Token t1 = null;
+      try {
+        t1 = jj_consume_token(SWITCH);
+        jj_consume_token(LPAREN);
+        jj_consume_token(IDENT);
+        jj_consume_token(RPAREN);
+        jj_consume_token(LBRACE);
+        switchCaseStat(g);
+        label_18:
+        while (true) {
+          switchCaseStat(f1);
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case CASE:
+          case DEFAULT_CASE:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[49] = jj_gen;
+            break label_18;
+          }
+        }
+        jj_consume_token(RBRACE);
+{if ("" != null) return new SwitchNode(t1);}
+      } catch (ParseException e) {
+consumeUntil(g, e, "switchStat");
+      {{if ("" != null) return new SwitchNode(t1);}}
+      }
+    throw new Error("Missing return statement in function");
+    } finally {
+      trace_return("switchStat");
+    }
+  }
+
+  final public void switchCaseStat(RecoverySet g) throws ParseException, ParseEOFException {
+    trace_call("switchCaseStat");
+    try {
+      try {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case CASE:{
+          jj_consume_token(CASE);
+          factor();
+          break;
+          }
+        case DEFAULT_CASE:{
+          jj_consume_token(DEFAULT_CASE);
+          break;
+          }
+        default:
+          jj_la1[50] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        jj_consume_token(COLON);
+        label_19:
+        while (true) {
+          statement(g);
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case BREAK:
+          case FOR:
+          case IF:
+          case INT:
+          case STRING:
+          case CHAR:
+          case BOOLEAN:
+          case DOUBLE:
+          case PRINT:
+          case READ:
+          case RETURN:
+          case SUPER:
+          case WHILE:
+          case DO:
+          case SWITCH:
+          case IDENT:
+          case LBRACE:
+          case SEMICOLON:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[51] = jj_gen;
+            break label_19;
+          }
+        }
+      } catch (ParseException e) {
+consumeUntil(g, e, "switchCaseStat");
+      }
+    } finally {
+      trace_return("switchCaseStat");
     }
   }
 
@@ -1570,12 +1698,12 @@ consumeUntil(g, e, "doWhileStat");
 
   private boolean jj_3_1()
  {
-    if (jj_3R_17()) return true;
+    if (jj_3R_20()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  private boolean jj_3R_17()
+  private boolean jj_3R_20()
  {
     if (!jj_rescan) trace_call("vardecl(LOOKING AHEAD...)");
     Token xsp;
@@ -1599,22 +1727,22 @@ consumeUntil(g, e, "doWhileStat");
     if (jj_scan_token(IDENT)) { if (!jj_rescan) trace_return("vardecl(LOOKAHEAD FAILED)"); return true; }
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_18()) { jj_scanpos = xsp; break; }
+      if (jj_3R_21()) { jj_scanpos = xsp; break; }
     }
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_19()) { jj_scanpos = xsp; break; }
+      if (jj_3R_22()) { jj_scanpos = xsp; break; }
     }
     { if (!jj_rescan) trace_return("vardecl(LOOKAHEAD SUCCEEDED)"); return false; }
   }
 
-  private boolean jj_3R_18()
+  private boolean jj_3R_21()
  {
     if (jj_scan_token(LBRACKET)) return true;
     return false;
   }
 
-  private boolean jj_3R_19()
+  private boolean jj_3R_22()
  {
     if (jj_scan_token(COMMA)) return true;
     return false;
@@ -1628,17 +1756,17 @@ consumeUntil(g, e, "doWhileStat");
     return false;
   }
 
-  private boolean jj_3_2()
- {
-    if (jj_scan_token(IDENT)) return true;
-    if (jj_scan_token(IDENT)) return true;
-    return false;
-  }
-
   private boolean jj_3_4()
  {
     if (jj_scan_token(IDENT)) return true;
     if (jj_scan_token(LPAREN)) return true;
+    return false;
+  }
+
+  private boolean jj_3_2()
+ {
+    if (jj_scan_token(IDENT)) return true;
+    if (jj_scan_token(IDENT)) return true;
     return false;
   }
 
@@ -1653,7 +1781,7 @@ consumeUntil(g, e, "doWhileStat");
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[47];
+  final private int[] jj_la1 = new int[52];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1663,13 +1791,13 @@ consumeUntil(g, e, "doWhileStat");
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x2001,0x2001,0x2000,0x10000,0x2000,0x4000,0x2780000,0x2780000,0x0,0x0,0x0,0x2780000,0x0,0x2780000,0x0,0x0,0x2780000,0x0,0x2780000,0xfa7e1000,0x4000000,0x0,0x0,0x1800000,0x1800000,0x8000,0x0,0x0,0x0,0xfa7e1000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x2001,0x2001,0x2000,0x10000,0x2000,0x4000,0x2780000,0x2780000,0x0,0x0,0x0,0x2780000,0x0,0x2780000,0x0,0x0,0x2780000,0x0,0x2780000,0xfa7e1000,0x4000000,0x0,0x0,0x1800000,0x1800000,0x8000,0x0,0x0,0x0,0xfa7e1000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1800000,0x1800000,0x0,0x0,0xfa7e1000,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x400,0x20000,0x100000,0x20000,0x400,0x20000,0x400,0x20000,0x100000,0x400,0x20000,0x400,0x88401,0xc00025f0,0xc00024d0,0xc0002490,0x0,0x0,0x0,0x400,0xc0002490,0x400,0x88401,0x220000,0x20000,0x200000,0x400,0x20000,0x400,0x3f000000,0x3f000000,0xc0000000,0xc0000000,0x0,0x0,0xc0000000,0xc0000000,0x2490,0x100000,0xc0002490,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x400,0x20000,0x100000,0x20000,0x400,0x20000,0x400,0x20000,0x100000,0x400,0x20000,0x400,0x88403,0xc00025f0,0xc00024d0,0xc0002490,0x0,0x0,0x0,0x400,0xc0002490,0x400,0x88403,0x220000,0x20000,0x200000,0x400,0x20000,0x400,0x3f000000,0x3f000000,0xc0000000,0xc0000000,0x0,0x0,0xc0000000,0xc0000000,0x2490,0x100000,0xc0002490,0x0,0x0,0xc,0xc,0x88403,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x7,0x7,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x7,0x7,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[4];
   private boolean jj_rescan = false;
@@ -1686,7 +1814,7 @@ consumeUntil(g, e, "doWhileStat");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 47; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1701,7 +1829,7 @@ consumeUntil(g, e, "doWhileStat");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 47; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1712,7 +1840,7 @@ consumeUntil(g, e, "doWhileStat");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 47; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1723,7 +1851,7 @@ consumeUntil(g, e, "doWhileStat");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 47; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1733,7 +1861,7 @@ consumeUntil(g, e, "doWhileStat");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 47; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1743,7 +1871,7 @@ consumeUntil(g, e, "doWhileStat");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 47; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1865,7 +1993,7 @@ consumeUntil(g, e, "doWhileStat");
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 47; i++) {
+    for (int i = 0; i < 52; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

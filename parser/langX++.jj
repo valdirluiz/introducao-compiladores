@@ -601,6 +601,8 @@ try {
 |
     s = doWhileStat(g)
 |
+    s = switchStat(g)
+|
     t1 = <LBRACE> l = statlist(f2) <RBRACE> { s = new BlockNode(t1, l); }
 |
     t1 = <BREAK> <SEMICOLON> { s = new BreakNode(t1);}
@@ -960,10 +962,39 @@ DoWhileNode doWhileStat(RecoverySet g) throws ParseEOFException :
 }
 {
     try {
-      t1 = <DO> s1 = statement(g) <LPAREN> e1 = expression(f1) <RPAREN>
+      t1 = <DO> s1 = statement(g) <LPAREN> ((e1 = expression(f1)) ((<AND> | <OR>) expression(f1) )* ) <RPAREN>
       {return new DoWhileNode(t1, s1, e1);}
     } catch (ParseException e) {
 		    consumeUntil(g, e, "doWhileStat");
         {return new DoWhileNode(t1, s1, e1);}
+    }
+}
+
+
+SwitchNode switchStat(RecoverySet g) throws ParseEOFException :
+{
+  RecoverySet f1 = new RecoverySet(RBRACE).union(g);
+  Token t1 = null;
+}
+{
+    try {
+    t1 = <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> switchCaseStat(g) (switchCaseStat(f1))+  <RBRACE>
+    {return new SwitchNode(t1);}
+    } catch (ParseException e) {
+		  consumeUntil(g, e, "switchStat");
+      {return new SwitchNode(t1);}
+    }
+}
+
+
+
+void switchCaseStat(RecoverySet g) throws ParseEOFException :
+{
+}
+{
+    try {
+      (<CASE> factor() | <DEFAULT_CASE>) <COLON> (statement(g))+
+    } catch (ParseException e) {
+		    consumeUntil(g, e, "switchCaseStat");
     }
 }
