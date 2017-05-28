@@ -1527,11 +1527,13 @@ consumeUntil(g, e, "whilestat");
     Token t1 = null;
     StatementNode s1 = null;
     ExpreNode e1 = null;
+    ListNode l = null;
       try {
         t1 = jj_consume_token(DO);
         s1 = statement(g);
         jj_consume_token(LPAREN);
         e1 = expression(f1);
+if(l==null) l = new ListNode(e1); else l.add(e1);
         label_17:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1558,13 +1560,14 @@ consumeUntil(g, e, "whilestat");
             jj_consume_token(-1);
             throw new ParseException();
           }
-          expression(f1);
+          e1 = expression(f1);
+l.add(e1);
         }
         jj_consume_token(RPAREN);
-{if ("" != null) return new DoWhileNode(t1, s1, e1);}
+{if ("" != null) return new DoWhileNode(t1, s1, l);}
       } catch (ParseException e) {
 consumeUntil(g, e, "doWhileStat");
-        {{if ("" != null) return new DoWhileNode(t1, s1, e1);}}
+        {{if ("" != null) return new DoWhileNode(t1, s1, l);}}
       }
     throw new Error("Missing return statement in function");
     } finally {

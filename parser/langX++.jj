@@ -960,14 +960,18 @@ DoWhileNode doWhileStat(RecoverySet g) throws ParseEOFException :
     Token t1 = null;
     StatementNode s1 = null;
     ExpreNode e1 = null;
+    ListNode l = null;
 }
 {
     try {
-      t1 = <DO> s1 = statement(g) <LPAREN> ((e1 = expression(f1)) ((<AND> | <OR>) expression(f1) )* ) <RPAREN>
-      {return new DoWhileNode(t1, s1, e1);}
+      t1 = <DO> s1 = statement(g)
+      <LPAREN>
+      ( (e1 = expression(f1) { if(l==null) l = new ListNode(e1); else l.add(e1);} ) ((<AND> | <OR>) e1 = expression(f1) {l.add(e1);} )* )
+      <RPAREN>
+      {return new DoWhileNode(t1, s1, l);}
     } catch (ParseException e) {
 		    consumeUntil(g, e, "doWhileStat");
-        {return new DoWhileNode(t1, s1, e1);}
+        {return new DoWhileNode(t1, s1, l);}
     }
 }
 
