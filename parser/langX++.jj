@@ -599,6 +599,8 @@ try {
 |
     s = whilestat(g)
 |
+    s = doWhileStat(g)
+|
     t1 = <LBRACE> l = statlist(f2) <RBRACE> { s = new BlockNode(t1, l); }
 |
     t1 = <BREAK> <SEMICOLON> { s = new BreakNode(t1);}
@@ -947,4 +949,21 @@ WhileNode whilestat(RecoverySet g)  throws ParseEOFException :
 		consumeUntil(g, e, "whilestat");
     {return new WhileNode(t1, e1, s3);}
 	}
+}
+
+DoWhileNode doWhileStat(RecoverySet g) throws ParseEOFException :
+{
+    RecoverySet f1 = new RecoverySet(RPAREN).union(g);
+    Token t1 = null;
+    StatementNode s1 = null;
+    ExpreNode e1 = null;
+}
+{
+    try {
+      t1 = <DO> s1 = statement(g) <LPAREN> e1 = expression(f1) <RPAREN>
+      {return new DoWhileNode(t1, s1, e1);}
+    } catch (ParseException e) {
+		    consumeUntil(g, e, "doWhileStat");
+        {return new DoWhileNode(t1, s1, e1);}
+    }
 }
