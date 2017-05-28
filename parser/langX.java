@@ -983,29 +983,6 @@ consumeUntil(g, e, "ifstat");
     }
   }
 
-  final public WhileNode whilestat(RecoverySet g) throws ParseException, ParseEOFException {
-    trace_call("whilestat");
-    try {RecoverySet f1 = new RecoverySet(RPAREN).union(g);
-  Token t1 = null;
-  ExpreNode e1 = null;
-  StatementNode s3 = null;
-      try {
-        t1 = jj_consume_token(WHILE);
-        jj_consume_token(LPAREN);
-        e1 = expression(f1);
-        jj_consume_token(RPAREN);
-        s3 = statement(g);
-{if ("" != null) return new WhileNode(t1, e1, s3);}
-      } catch (ParseException e) {
-consumeUntil(g, e, "whilestat");
-    {{if ("" != null) return new WhileNode(t1, e1, s3);}}
-      }
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("whilestat");
-    }
-  }
-
   final public ForNode forstat(RecoverySet g) throws ParseException, ParseEOFException {
     trace_call("forstat");
     try {AtribNode s1 = null,
@@ -1508,6 +1485,29 @@ l.add(e);
     }
   }
 
+  final public WhileNode whilestat(RecoverySet g) throws ParseException, ParseEOFException {
+    trace_call("whilestat");
+    try {RecoverySet f1 = new RecoverySet(RPAREN).union(g);
+  Token t1 = null;
+  ExpreNode e1 = null;
+  StatementNode s3 = null;
+      try {
+        t1 = jj_consume_token(WHILE);
+        jj_consume_token(LPAREN);
+        e1 = expression(f1);
+        jj_consume_token(RPAREN);
+        s3 = statement(g);
+{if ("" != null) return new WhileNode(t1, e1, s3);}
+      } catch (ParseException e) {
+consumeUntil(g, e, "whilestat");
+    {{if ("" != null) return new WhileNode(t1, e1, s3);}}
+      }
+    throw new Error("Missing return statement in function");
+    } finally {
+      trace_return("whilestat");
+    }
+  }
+
   private boolean jj_2_1(int xla)
  {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
@@ -1540,9 +1540,8 @@ l.add(e);
     finally { jj_save(3, xla); }
   }
 
-  private boolean jj_3_3()
+  private boolean jj_3_4()
  {
-    if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENT)) return true;
     if (jj_scan_token(LPAREN)) return true;
     return false;
@@ -1594,16 +1593,17 @@ l.add(e);
     return false;
   }
 
-  private boolean jj_3_4()
- {
-    if (jj_scan_token(IDENT)) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    return false;
-  }
-
   private boolean jj_3R_19()
  {
     if (jj_scan_token(COMMA)) return true;
+    return false;
+  }
+
+  private boolean jj_3_3()
+ {
+    if (jj_scan_token(DOT)) return true;
+    if (jj_scan_token(IDENT)) return true;
+    if (jj_scan_token(LPAREN)) return true;
     return false;
   }
 

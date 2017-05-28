@@ -729,25 +729,6 @@ catch (ParseException e)
 }
 }
 
-
-WhileNode whilestat(RecoverySet g)  throws ParseEOFException :
-{
-  RecoverySet f1 = new RecoverySet(RPAREN).union(g);
-  Token t1 = null;
-  ExpreNode e1 = null;
-  StatementNode s3 = null;
-}
-{
-    try {
-      t1 = <WHILE> <LPAREN> e1 = expression(f1) <RPAREN>  s3 = statement(g)
-      {return new WhileNode(t1, e1, s3);}
-    } catch (ParseException e) {
-		consumeUntil(g, e, "whilestat");
-    {return new WhileNode(t1, e1, s3);}
-	}
-}
-
-
 ForNode forstat(RecoverySet g) throws ParseEOFException :
 {
 AtribNode s1 = null,
@@ -949,4 +930,21 @@ RecoverySet f =  new RecoverySet(COMMA).union(g);
        )*
     ]
     { return l;}
+}
+
+WhileNode whilestat(RecoverySet g)  throws ParseEOFException :
+{
+  RecoverySet f1 = new RecoverySet(RPAREN).union(g);
+  Token t1 = null;
+  ExpreNode e1 = null;
+  StatementNode s3 = null;
+}
+{
+    try {
+      t1 = <WHILE> <LPAREN> e1 = expression(f1) <RPAREN>  s3 = statement(g)
+      {return new WhileNode(t1, e1, s3);}
+    } catch (ParseException e) {
+		consumeUntil(g, e, "whilestat");
+    {return new WhileNode(t1, e1, s3);}
+	}
 }
