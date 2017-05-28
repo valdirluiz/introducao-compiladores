@@ -721,6 +721,10 @@ RecoverySet f2 = new RecoverySet(RBRACE).union(g).remove(IDENT);
             s = forstat(g);
             break;
             }
+          case WHILE:{
+            s = whilestat(g);
+            break;
+            }
           case LBRACE:{
             t1 = jj_consume_token(LBRACE);
             l = statlist(f2);
@@ -979,6 +983,29 @@ consumeUntil(g, e, "ifstat");
     }
   }
 
+  final public WhileNode whilestat(RecoverySet g) throws ParseException, ParseEOFException {
+    trace_call("whilestat");
+    try {RecoverySet f1 = new RecoverySet(RPAREN).union(g);
+  Token t1 = null;
+  ExpreNode e1 = null;
+  StatementNode s3 = null;
+      try {
+        t1 = jj_consume_token(WHILE);
+        jj_consume_token(LPAREN);
+        e1 = expression(f1);
+        jj_consume_token(RPAREN);
+        s3 = statement(g);
+{if ("" != null) return new WhileNode(t1, e1, s3);}
+      } catch (ParseException e) {
+consumeUntil(g, e, "whilestat");
+    {{if ("" != null) return new WhileNode(t1, e1, s3);}}
+      }
+    throw new Error("Missing return statement in function");
+    } finally {
+      trace_return("whilestat");
+    }
+  }
+
   final public ForNode forstat(RecoverySet g) throws ParseException, ParseEOFException {
     trace_call("forstat");
     try {AtribNode s1 = null,
@@ -1059,6 +1086,7 @@ RecoverySet f = First.statlist.remove(IDENT).union(g);
       case READ:
       case RETURN:
       case SUPER:
+      case WHILE:
       case IDENT:
       case LBRACE:
       case SEMICOLON:{
@@ -1512,8 +1540,9 @@ l.add(e);
     finally { jj_save(3, xla); }
   }
 
-  private boolean jj_3_4()
+  private boolean jj_3_3()
  {
+    if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENT)) return true;
     if (jj_scan_token(LPAREN)) return true;
     return false;
@@ -1565,17 +1594,16 @@ l.add(e);
     return false;
   }
 
-  private boolean jj_3R_19()
+  private boolean jj_3_4()
  {
-    if (jj_scan_token(COMMA)) return true;
+    if (jj_scan_token(IDENT)) return true;
+    if (jj_scan_token(LPAREN)) return true;
     return false;
   }
 
-  private boolean jj_3_3()
+  private boolean jj_3R_19()
  {
-    if (jj_scan_token(DOT)) return true;
-    if (jj_scan_token(IDENT)) return true;
-    if (jj_scan_token(LPAREN)) return true;
+    if (jj_scan_token(COMMA)) return true;
     return false;
   }
 
@@ -1607,7 +1635,7 @@ l.add(e);
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x2001,0x2001,0x2000,0x10000,0x2000,0x4000,0x2780000,0x2780000,0x0,0x0,0x0,0x2780000,0x0,0x2780000,0x0,0x0,0x2780000,0x0,0x2780000,0x7a7e1000,0x4000000,0x0,0x0,0x1800000,0x1800000,0x8000,0x0,0x0,0x0,0x7a7e1000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x2001,0x2001,0x2000,0x10000,0x2000,0x4000,0x2780000,0x2780000,0x0,0x0,0x0,0x2780000,0x0,0x2780000,0x0,0x0,0x2780000,0x0,0x2780000,0xfa7e1000,0x4000000,0x0,0x0,0x1800000,0x1800000,0x8000,0x0,0x0,0x0,0xfa7e1000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x400,0x20000,0x100000,0x20000,0x400,0x20000,0x400,0x20000,0x100000,0x400,0x20000,0x400,0x88400,0xc00025f0,0xc00024d0,0xc0002490,0x0,0x0,0x0,0x400,0xc0002490,0x400,0x88400,0x220000,0x20000,0x200000,0x400,0x20000,0x400,0x3f000000,0x3f000000,0xc0000000,0xc0000000,0x0,0x0,0xc0000000,0xc0000000,0x2490,0x100000,0xc0002490,};
