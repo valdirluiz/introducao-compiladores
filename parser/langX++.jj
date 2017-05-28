@@ -943,14 +943,17 @@ WhileNode whilestat(RecoverySet g)  throws ParseEOFException :
   Token t1 = null;
   ExpreNode e1 = null;
   StatementNode s3 = null;
+  ListNode l = null;
 }
 {
     try {
-      t1 = <WHILE> <LPAREN> e1 = expression(f1) <RPAREN>  s3 = statement(g)
-      {return new WhileNode(t1, e1, s3);}
+      t1 = <WHILE>
+      <LPAREN> ( (e1 = expression(f1) { if(l==null) l = new ListNode(e1); else l.add(e1);} ) ((<AND> | <OR>) e1 = expression(f1) {l.add(e1);} )* ) <RPAREN>
+        s3 = statement(g)
+      {return new WhileNode(t1, l, s3);}
     } catch (ParseException e) {
 		consumeUntil(g, e, "whilestat");
-    {return new WhileNode(t1, e1, s3);}
+    {return new WhileNode(t1, l, s3);}
 	}
 }
 

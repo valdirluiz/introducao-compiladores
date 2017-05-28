@@ -4,13 +4,13 @@ import parser.*;
 
 public class WhileNode extends StatementNode {
 
-  public ExpreNode expression;
+  public ListNode expressions;
   public StatementNode s3 = null;
   public StatementNode statement = null;
-  
-  public WhileNode(Token t1, ExpreNode expression, StatementNode statement){
+
+  public WhileNode(Token t1, ListNode expressions, StatementNode statement){
       super(t1);
-      this.expression = expression;
+      this.expressions = expressions;
       this.statement = statement;
   }
 
