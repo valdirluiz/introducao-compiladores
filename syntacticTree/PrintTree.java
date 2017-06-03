@@ -445,9 +445,11 @@ public class PrintTree {
         }
 
         x.number = kk++;
-        numberExpreNode(x.expr);
-        numberStatementNode(x.stat1);
-        numberStatementNode(x.stat2);
+
+        //TODO: ajustar
+        //numberExpreNode(x.expr);
+        //numberStatementNode(x.stat1);
+        //numberStatementNode(x.stat2);
     }
 
     public void printIfNode(IfNode x) {
@@ -460,9 +462,10 @@ public class PrintTree {
             x.stat1.number + " " +
             ((x.stat2 == null) ? "null" : String.valueOf(x.stat2.number)));
 
-        printExpreNode(x.expr);
-        printStatementNode(x.stat1);
-        printStatementNode(x.stat2);
+        //TODO: ajustar
+        //printExpreNode(x.expr);
+        //printStatementNode(x.stat1);
+        //printStatementNode(x.stat2);
     }
 
     // ------------------------- comando for -----------------------
@@ -850,10 +853,6 @@ public class PrintTree {
             printCallNode((CallNode) x);
         } else if (x instanceof IntConstNode) {
             printIntConstNode((IntConstNode) x);
-        } else if (x instanceof StringConstNode) {
-            printStringConstNode((StringConstNode) x);
-        } else if (x instanceof NullConstNode) {
-            printNullConstNode((NullConstNode) x);
         } else if (x instanceof IndexNode) {
             printIndexNode((IndexNode) x);
         } else if (x instanceof DotNode) {
@@ -880,10 +879,6 @@ public class PrintTree {
             numberCallNode((CallNode) x);
         } else if (x instanceof IntConstNode) {
             numberIntConstNode((IntConstNode) x);
-        } else if (x instanceof StringConstNode) {
-            numberStringConstNode((StringConstNode) x);
-        } else if (x instanceof NullConstNode) {
-            numberNullConstNode((NullConstNode) x);
         } else if (x instanceof IndexNode) {
             numberIndexNode((IndexNode) x);
         } else if (x instanceof DotNode) {

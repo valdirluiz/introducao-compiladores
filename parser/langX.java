@@ -8,9 +8,9 @@ import syntacticTree.*;
 
 
 public class langX implements langXConstants {
-final static String Version = "X++ Compiler - Version 1.0 - 2004";
-int contParseError = 0;
-boolean debug_recovery;
+final static String Version = "X+++ Compiler - Version 4.0 - 2017";
+int contParseError = 0;           // contador de erros sint�ticos
+boolean debug_recovery;   // controla verbose de recupera��o de erros
 Token lastError = null;
 
 
@@ -19,14 +19,15 @@ Token lastError = null;
   {
   boolean debug_as = false;
   boolean debug_recovery = false;
+  boolean print_tree = false;
 
-    String filename = ""; // nome do arquivo a ser analisado
-    langX parser;     // analisador l�xico/sint�tico
+    String filename = "";
+    langX parser;
     int i;
     boolean ms = false;
 
     System.out.println(Version);
-    // l� os par�metros passados para o compilador
+
     for (i = 0; i < args.length - 1; i++)
     {
         if (args[i].equals("-debug_AS") )
@@ -35,10 +36,13 @@ Token lastError = null;
         if (args[i].equals("-debug_recovery") )
             debug_recovery = true;
         else
+        if (args[i].equals("-print_tree") )
+            print_tree = true;
+        else
         {
             System.out.println("Usage is: java langX [-debug_AS] " +
-             "[-debug_recovery] inputfile");
-            System.exit(0);
+             "[-debug_recovery] [-print_tree] inputfile");
+             System.exit(0);
         }
     }
 
@@ -63,6 +67,7 @@ Token lastError = null;
     ListNode root = null;
     parser.debug_recovery = debug_recovery;
     if (! debug_as) parser.disable_tracing();
+
     try {
         root = parser.program();
     }
@@ -75,6 +80,13 @@ Token lastError = null;
                                 " Lexical Errors found");
         System.out.println(parser.contParseError + " Syntactic Errors found");
      }
+
+    if ( parser.token_source.foundLexError()
+         + parser.contParseError == 0 && print_tree)
+    {
+        PrintTree prt = new PrintTree();
+        prt.printRoot(root);
+    }
 
 }  // main
 
@@ -91,9 +103,7 @@ String s;
 }
 
 
-boolean eof;    // vari�vel que indica se EOF foi alcan�ado
-// o m�todo abaixo consome tokens at� alcan�ar um que perten�a ao conjunto
-// de sincroniza��o
+boolean eof;
 
 void consumeUntil(RecoverySet g,
                  ParseException e,
@@ -102,17 +112,17 @@ void consumeUntil(RecoverySet g,
 {
 Token tok;
 
-   if ( debug_recovery) // informa��o sobre a recupera��o
+   if ( debug_recovery)
    {
        System.out.println();
        System.out.println("*** " + met + " ***");
        System.out.println("     Syncronizing Set: " + g);
    }
 
-   if (g == null) throw e; // se o conjunto � null, propaga a exce��o
+   if (g == null) throw e;
 
-   tok = getToken(1); // pega token corrente
-   while ( ! eof )  // se n�o chegou ao fim do arquivo
+   tok = getToken(1);
+   while ( ! eof )
    {
         if ( g.contains(tok.kind ) ) //achou um token no conjunto
         {
@@ -123,16 +133,16 @@ Token tok;
         }
         if (debug_recovery)
              System.out.println("     Ignoring token: " + im(tok.kind));
-        getNextToken();     // pega pr�ximo token
+        getNextToken();
         tok = getToken(1);
-        if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?
+        if (tok.kind == EOF && ! g.contains(EOF) )
             eof = true;
     }
    if ( tok != lastError)
    {
         System.out.println(e.getMessage());
         lastError = tok;
-        contParseError++;  // incrementa n�mero de erros
+        contParseError++;
    }
    if ( eof ) throw new ParseEOFException("EOF found prematurely.");
 }
@@ -1831,6 +1841,21 @@ consumeUntil(g, e, "switchCaseStat");
     finally { jj_save(3, xla); }
   }
 
+  private boolean jj_3_2()
+ {
+    if (jj_scan_token(IDENT)) return true;
+    if (jj_scan_token(IDENT)) return true;
+    return false;
+  }
+
+  private boolean jj_3_3()
+ {
+    if (jj_scan_token(DOT)) return true;
+    if (jj_scan_token(IDENT)) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    return false;
+  }
+
   private boolean jj_3_1()
  {
     if (jj_3R_21()) return true;
@@ -1887,21 +1912,6 @@ consumeUntil(g, e, "switchCaseStat");
   private boolean jj_3R_23()
  {
     if (jj_scan_token(COMMA)) return true;
-    return false;
-  }
-
-  private boolean jj_3_2()
- {
-    if (jj_scan_token(IDENT)) return true;
-    if (jj_scan_token(IDENT)) return true;
-    return false;
-  }
-
-  private boolean jj_3_3()
- {
-    if (jj_scan_token(DOT)) return true;
-    if (jj_scan_token(IDENT)) return true;
-    if (jj_scan_token(LPAREN)) return true;
     return false;
   }
 
