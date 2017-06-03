@@ -959,6 +959,8 @@ StatementNode s1 = null,
               s2 = null;
 Token t = null;
 ListNode l = null;
+ListNode cl = null;
+Token co = null;
 
 RecoverySet f1 = new RecoverySet(RPAREN).union(g),
             f2 = new RecoverySet(ELSE).union(g);
@@ -981,11 +983,13 @@ if(l==null) l = new ListNode(e1); else l.add(e1);
           }
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
           case AND:{
-            jj_consume_token(AND);
+            co = jj_consume_token(AND);
+if(cl==null) cl = new ListNode(new AndNode(co)); else cl.add(new AndNode(co));
             break;
             }
           case OR:{
-            jj_consume_token(OR);
+            co = jj_consume_token(OR);
+if(cl==null) cl = new ListNode(new OrNode(co)); else cl.add(new OrNode(co));
             break;
             }
           default:
@@ -1008,7 +1012,7 @@ l.add(e1);
           jj_la1[26] = jj_gen;
           ;
         }
-{if ("" != null) return new IfNode(t, l, s1, s2);}
+{if ("" != null) return new IfNode(t, l, s1, s2, cl);}
       } catch (ParseException e) {
 consumeUntil(g, e, "ifstat");
    {if ("" != null) return new IfNode(t, l, s1, s2);}
@@ -1859,9 +1863,8 @@ consumeUntil(g, e, "switchCaseStat");
     { if (!jj_rescan) trace_return("vardecl(LOOKAHEAD SUCCEEDED)"); return false; }
   }
 
-  private boolean jj_3_3()
+  private boolean jj_3_4()
  {
-    if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENT)) return true;
     if (jj_scan_token(LPAREN)) return true;
     return false;
@@ -1879,17 +1882,18 @@ consumeUntil(g, e, "switchCaseStat");
     return false;
   }
 
-  private boolean jj_3_4()
- {
-    if (jj_scan_token(IDENT)) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    return false;
-  }
-
   private boolean jj_3_2()
  {
     if (jj_scan_token(IDENT)) return true;
     if (jj_scan_token(IDENT)) return true;
+    return false;
+  }
+
+  private boolean jj_3_3()
+ {
+    if (jj_scan_token(DOT)) return true;
+    if (jj_scan_token(IDENT)) return true;
+    if (jj_scan_token(LPAREN)) return true;
     return false;
   }
 
