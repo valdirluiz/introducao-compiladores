@@ -1484,6 +1484,10 @@ e = new BooleanConstNode(t);
     trace_call("arglist");
     try {ListNode l = null;
 ExpreNode e = null;
+Token t = null;
+StringConstNode s = null;
+CharConstNode c = null;
+FloatConstNode fc = null;
 
 RecoverySet f =  new RecoverySet(COMMA).union(g);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1498,15 +1502,18 @@ RecoverySet f =  new RecoverySet(COMMA).union(g);
       case MINUS:{
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case float_constant:{
-          jj_consume_token(float_constant);
+          t = jj_consume_token(float_constant);
+if(l==null) l = new ListNode(new FloatConstNode(t)); else l.add(new FloatConstNode(t));
           break;
           }
         case string_constant:{
-          jj_consume_token(string_constant);
+          t = jj_consume_token(string_constant);
+if(l==null) l = new ListNode(new StringConstNode(t)); else l.add(new StringConstNode(t));
           break;
           }
         case char_constant:{
-          jj_consume_token(char_constant);
+          t = jj_consume_token(char_constant);
+if(l==null) l = new ListNode(new CharConstNode(t)); else l.add(new CharConstNode(t));
           break;
           }
         case int_constant:
@@ -1516,7 +1523,7 @@ RecoverySet f =  new RecoverySet(COMMA).union(g);
         case PLUS:
         case MINUS:{
           e = expression(f);
-l = new ListNode(e);
+if(l==null) l = new ListNode(e); else l.add(e);
           break;
           }
         default:
@@ -1538,15 +1545,18 @@ l = new ListNode(e);
           jj_consume_token(COMMA);
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
           case float_constant:{
-            jj_consume_token(float_constant);
+            t = jj_consume_token(float_constant);
+l.add(new FloatConstNode(t));
             break;
             }
           case string_constant:{
-            jj_consume_token(string_constant);
+            t = jj_consume_token(string_constant);
+l.add(new StringConstNode(t));
             break;
             }
           case char_constant:{
-            jj_consume_token(char_constant);
+            t = jj_consume_token(char_constant);
+l.add(new CharConstNode(t));
             break;
             }
           case int_constant:

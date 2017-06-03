@@ -924,24 +924,27 @@ ListNode arglist(RecoverySet g) throws ParseEOFException :
 {
 ListNode l = null;
 ExpreNode e = null;
+Token t = null;
+StringConstNode s = null;
+CharConstNode c = null;
+FloatConstNode fc = null;
 
 RecoverySet f =  new RecoverySet(COMMA).union(g);
 }
 {
 
       [ (
-            <float_constant>
-          | <string_constant>
-          | <char_constant>
-          | e = expression(f)
-          { l = new ListNode(e); }
+            t = <float_constant> { if(l==null) l = new ListNode(new FloatConstNode(t)); else l.add(new FloatConstNode(t)); }
+          | t = <string_constant> { if(l==null) l = new ListNode(new StringConstNode(t)); else l.add(new StringConstNode(t)); }
+          | t = <char_constant>   { if(l==null) l = new ListNode(new CharConstNode(t)); else l.add(new CharConstNode(t)); }
+          | e = expression(f)     { if(l==null) l = new ListNode(e); else l.add(e); }
          )
           (<COMMA> (
-                      <float_constant>
-                      | <string_constant>
-                      | <char_constant>
-                      | e = expression(f)   { l.add(e);}
-                    )
+          t = <float_constant>  {l.add(new FloatConstNode(t)); }
+        | t = <string_constant> {l.add(new StringConstNode(t)); }
+        | t = <char_constant>   {l.add(new CharConstNode(t)); }
+        | e = expression(f)     {l.add(e);}
+                   )
          )*]
 
     { return l;}
