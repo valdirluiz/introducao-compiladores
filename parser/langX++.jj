@@ -925,10 +925,6 @@ ListNode arglist(RecoverySet g) throws ParseEOFException :
 ListNode l = null;
 ExpreNode e = null;
 Token t = null;
-StringConstNode s = null;
-CharConstNode c = null;
-FloatConstNode fc = null;
-
 RecoverySet f =  new RecoverySet(COMMA).union(g);
 }
 {

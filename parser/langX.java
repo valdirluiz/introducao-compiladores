@@ -1485,10 +1485,6 @@ e = new BooleanConstNode(t);
     try {ListNode l = null;
 ExpreNode e = null;
 Token t = null;
-StringConstNode s = null;
-CharConstNode c = null;
-FloatConstNode fc = null;
-
 RecoverySet f =  new RecoverySet(COMMA).union(g);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case int_constant:
