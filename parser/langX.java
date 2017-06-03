@@ -1015,7 +1015,7 @@ l.add(e1);
 {if ("" != null) return new IfNode(t, l, s1, s2, cl);}
       } catch (ParseException e) {
 consumeUntil(g, e, "ifstat");
-   {if ("" != null) return new IfNode(t, l, s1, s2);}
+   {if ("" != null) return new IfNode(t, l, s1, s2, cl);}
       }
     throw new Error("Missing return statement in function");
     } finally {
@@ -1649,6 +1649,8 @@ consumeUntil(g, e, "whilestat");
     StatementNode s1 = null;
     ExpreNode e1 = null;
     ListNode l = null;
+    Token co = null;
+    ListNode cl = null;
       try {
         t1 = jj_consume_token(DO);
         s1 = statement(g);
@@ -1669,11 +1671,13 @@ if(l==null) l = new ListNode(e1); else l.add(e1);
           }
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
           case AND:{
-            jj_consume_token(AND);
+            co = jj_consume_token(AND);
+if(cl==null) cl = new ListNode(new AndNode(co)); else cl.add(new AndNode(co));
             break;
             }
           case OR:{
-            jj_consume_token(OR);
+            co = jj_consume_token(OR);
+if(cl==null) cl = new ListNode(new OrNode(co)); else cl.add(new OrNode(co));
             break;
             }
           default:
@@ -1685,10 +1689,10 @@ if(l==null) l = new ListNode(e1); else l.add(e1);
 l.add(e1);
         }
         jj_consume_token(RPAREN);
-{if ("" != null) return new DoWhileNode(t1, s1, l);}
+{if ("" != null) return new DoWhileNode(t1, s1, l, cl);}
       } catch (ParseException e) {
 consumeUntil(g, e, "doWhileStat");
-        {{if ("" != null) return new DoWhileNode(t1, s1, l);}}
+        {{if ("" != null) return new DoWhileNode(t1, s1, l, cl);}}
       }
     throw new Error("Missing return statement in function");
     } finally {
