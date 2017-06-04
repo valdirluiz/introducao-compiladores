@@ -8,13 +8,13 @@ package parser;
 
 import java.io.*;
 import recovery.*;
-import syntacticTree.*; 
+import syntacticTree.*;
 
 
 public class langX {
 final static String Version = "X+++ Compiler - Version 4.0 - 2017";
-int contParseError = 0;           // contador de erros sint�ticos
-boolean debug_recovery;   // controla verbose de recupera��o de erros
+int contParseError = 0;
+boolean debug_recovery;
 Token lastError = null;
 
 
@@ -630,19 +630,21 @@ catch (ParseException e)
 AtribNode atribstat(RecoverySet g) throws ParseEOFException :
 {
 ExpreNode e1 = null, e2 = null;
-Token t1 = null, t2 = null;
+Token t1 = null;
+Token t2 = null;
 
 RecoverySet f1 = new RecoverySet(ASSIGN).union(g);
 }
 {
 try {
-    e1 = lvalue(f1) t1 = <ASSIGN> ( e2 = alocexpression(g) | e2 = expression(g) | t2 = <float_constant> | t2 = <char_constant> | t2 = <string_constant>)
-    { return new AtribNode(t1, e1, e2, t2); }
+    e1 = lvalue(f1) t1 = <ASSIGN>
+    ( e2 = alocexpression(g) | e2 = expression(g) | t2 = <float_constant> {e2 = new FloatConstNode(t2);} | t2 = <char_constant> {e2 = new CharConstNode(t2);} | t2 = <string_constant> {e2 = new StringConstNode(t2);})
+    { return new AtribNode(t1, e1, e2); }
 }
 catch (ParseException e)
 {
    consumeUntil(g, e, "atribstat");
-   return new AtribNode(t1, e1, e2, t2);
+   return new AtribNode(t1, e1, e2);
 }
 }
 
@@ -654,13 +656,13 @@ Token t2 = null;
 }
 {
 try {
-    t1 = <PRINT> (e1 = expression(g) | t2 = <string_constant>)
-      { return new PrintNode(t1, e1, t2); }
+    t1 = <PRINT> (e1 = expression(g) | t2 = <string_constant> {e1 = new StringConstNode(t2);} | t2 = <char_constant> {e1 = new CharConstNode(t2);} | t2 = <float_constant> {e1 = new FloatConstNode(t2);})
+      { return new PrintNode(t1, e1); }
 }
 catch (ParseException e)
 {
    consumeUntil(g, e, "printstat");
-   return new PrintNode(t1, e1, t2);
+   return new PrintNode(t1, e1);
 }
 }
 

@@ -7,7 +7,7 @@ public class PrintTree {
     int kk;
 
     public PrintTree() {
-        kk = 1; // inicializa contador de nodos
+        kk = 1; // inicializa contador de nós
     }
 
     public void printRoot(ListNode x) {
@@ -445,11 +445,10 @@ public class PrintTree {
         }
 
         x.number = kk++;
-
-        //TODO: ajustar
+        //TODO: alterar para lista de expressions
         //numberExpreNode(x.expr);
-        //numberStatementNode(x.stat1);
-        //numberStatementNode(x.stat2);
+        numberStatementNode(x.stat1);
+        numberStatementNode(x.stat2);
     }
 
     public void printIfNode(IfNode x) {
@@ -462,10 +461,10 @@ public class PrintTree {
             x.stat1.number + " " +
             ((x.stat2 == null) ? "null" : String.valueOf(x.stat2.number)));
 
-        //TODO: ajustar
+        //TODO: alterar para lista de expressions
         //printExpreNode(x.expr);
-        //printStatementNode(x.stat1);
-        //printStatementNode(x.stat2);
+        printStatementNode(x.stat1);
+        printStatementNode(x.stat2);
     }
 
     // ------------------------- comando for -----------------------
@@ -853,6 +852,10 @@ public class PrintTree {
             printCallNode((CallNode) x);
         } else if (x instanceof IntConstNode) {
             printIntConstNode((IntConstNode) x);
+        } else if (x instanceof StringConstNode) {
+            printStringConstNode((StringConstNode) x);
+        } else if (x instanceof NullConstNode) {
+            printNullConstNode((NullConstNode) x);
         } else if (x instanceof IndexNode) {
             printIndexNode((IndexNode) x);
         } else if (x instanceof DotNode) {
@@ -879,6 +882,10 @@ public class PrintTree {
             numberCallNode((CallNode) x);
         } else if (x instanceof IntConstNode) {
             numberIntConstNode((IntConstNode) x);
+        } else if (x instanceof StringConstNode) {
+            numberStringConstNode((StringConstNode) x);
+        } else if (x instanceof NullConstNode) {
+            numberNullConstNode((NullConstNode) x);
         } else if (x instanceof IndexNode) {
             numberIndexNode((IndexNode) x);
         } else if (x instanceof DotNode) {

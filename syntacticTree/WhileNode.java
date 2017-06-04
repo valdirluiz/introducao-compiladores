@@ -5,7 +5,6 @@ import parser.*;
 public class WhileNode extends StatementNode {
 
   public ListNode expressions;
-  public StatementNode s3 = null;
   public StatementNode statement = null;
   public ListNode connectors;
 

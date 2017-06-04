@@ -9,8 +9,8 @@ import syntacticTree.*;
 
 public class langX implements langXConstants {
 final static String Version = "X+++ Compiler - Version 4.0 - 2017";
-int contParseError = 0;           // contador de erros sint�ticos
-boolean debug_recovery;   // controla verbose de recupera��o de erros
+int contParseError = 0;
+boolean debug_recovery;
 Token lastError = null;
 
 
@@ -781,7 +781,8 @@ consumeUntil(g, e, "statement");
   final public AtribNode atribstat(RecoverySet g) throws ParseException, ParseEOFException {
     trace_call("atribstat");
     try {ExpreNode e1 = null, e2 = null;
-Token t1 = null, t2 = null;
+Token t1 = null;
+Token t2 = null;
 
 RecoverySet f1 = new RecoverySet(ASSIGN).union(g);
       try {
@@ -803,14 +804,17 @@ RecoverySet f1 = new RecoverySet(ASSIGN).union(g);
           }
         case float_constant:{
           t2 = jj_consume_token(float_constant);
+e2 = new FloatConstNode(t2);
           break;
           }
         case char_constant:{
           t2 = jj_consume_token(char_constant);
+e2 = new CharConstNode(t2);
           break;
           }
         case string_constant:{
           t2 = jj_consume_token(string_constant);
+e2 = new StringConstNode(t2);
           break;
           }
         default:
@@ -818,10 +822,10 @@ RecoverySet f1 = new RecoverySet(ASSIGN).union(g);
           jj_consume_token(-1);
           throw new ParseException();
         }
-{if ("" != null) return new AtribNode(t1, e1, e2, t2);}
+{if ("" != null) return new AtribNode(t1, e1, e2);}
       } catch (ParseException e) {
 consumeUntil(g, e, "atribstat");
-   {if ("" != null) return new AtribNode(t1, e1, e2, t2);}
+   {if ("" != null) return new AtribNode(t1, e1, e2);}
       }
     throw new Error("Missing return statement in function");
     } finally {
@@ -848,6 +852,17 @@ Token t2 = null;
           }
         case string_constant:{
           t2 = jj_consume_token(string_constant);
+e1 = new StringConstNode(t2);
+          break;
+          }
+        case char_constant:{
+          t2 = jj_consume_token(char_constant);
+e1 = new CharConstNode(t2);
+          break;
+          }
+        case float_constant:{
+          t2 = jj_consume_token(float_constant);
+e1 = new FloatConstNode(t2);
           break;
           }
         default:
@@ -855,10 +870,10 @@ Token t2 = null;
           jj_consume_token(-1);
           throw new ParseException();
         }
-{if ("" != null) return new PrintNode(t1, e1, t2);}
+{if ("" != null) return new PrintNode(t1, e1);}
       } catch (ParseException e) {
 consumeUntil(g, e, "printstat");
-   {if ("" != null) return new PrintNode(t1, e1, t2);}
+   {if ("" != null) return new PrintNode(t1, e1);}
       }
     throw new Error("Missing return statement in function");
     } finally {
@@ -1848,9 +1863,8 @@ consumeUntil(g, e, "switchCaseStat");
     return false;
   }
 
-  private boolean jj_3_3()
+  private boolean jj_3_4()
  {
-    if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENT)) return true;
     if (jj_scan_token(LPAREN)) return true;
     return false;
@@ -1896,13 +1910,6 @@ consumeUntil(g, e, "switchCaseStat");
     { if (!jj_rescan) trace_return("vardecl(LOOKAHEAD SUCCEEDED)"); return false; }
   }
 
-  private boolean jj_3_4()
- {
-    if (jj_scan_token(IDENT)) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    return false;
-  }
-
   private boolean jj_3R_22()
  {
     if (jj_scan_token(LBRACKET)) return true;
@@ -1912,6 +1919,14 @@ consumeUntil(g, e, "switchCaseStat");
   private boolean jj_3R_23()
  {
     if (jj_scan_token(COMMA)) return true;
+    return false;
+  }
+
+  private boolean jj_3_3()
+ {
+    if (jj_scan_token(DOT)) return true;
+    if (jj_scan_token(IDENT)) return true;
+    if (jj_scan_token(LPAREN)) return true;
     return false;
   }
 
@@ -1939,7 +1954,7 @@ consumeUntil(g, e, "switchCaseStat");
       jj_la1_0 = new int[] {0x2001,0x2001,0x2000,0x10000,0x2000,0x4000,0x2780000,0x2780000,0x0,0x0,0x0,0x2780000,0x0,0x2780000,0x0,0x0,0x2780000,0x0,0x2780000,0xfa7e1000,0x4000000,0x0,0x0,0x0,0x1800000,0x1800000,0x8000,0x0,0x0,0x0,0xfa7e1000,0x0,0x0,0x0,0x180000,0x0,0x180000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1800000,0x1800000,0x1800000,0x1800000,0x0,0x0,0xfa7e1000,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x400,0x20000,0x100000,0x20000,0x400,0x20000,0x400,0x20000,0x100000,0x400,0x20000,0x400,0x88403,0xc00025f0,0xc00024d0,0xc00025d0,0xc00025d0,0x0,0x0,0x0,0x400,0xc0002490,0x400,0x88403,0x220000,0x20000,0x200000,0x400,0x20000,0x400,0x3f000000,0x3f000000,0xc0000000,0xc0000000,0x0,0x0,0xc0000000,0xc0000000,0x2490,0xc00025f0,0x100000,0xc00025f0,0xc00025f0,0x0,0x0,0x0,0x0,0xc,0xc,0x88403,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x400,0x20000,0x100000,0x20000,0x400,0x20000,0x400,0x20000,0x100000,0x400,0x20000,0x400,0x88403,0xc00025f0,0xc00025f0,0xc00025d0,0xc00025d0,0x0,0x0,0x0,0x400,0xc0002490,0x400,0x88403,0x220000,0x20000,0x200000,0x400,0x20000,0x400,0x3f000000,0x3f000000,0xc0000000,0xc0000000,0x0,0x0,0xc0000000,0xc0000000,0x2490,0xc00025f0,0x100000,0xc00025f0,0xc00025f0,0x0,0x0,0x0,0x0,0xc,0xc,0x88403,};
    }
    private static void jj_la1_init_2() {
       jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x7,0x7,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
