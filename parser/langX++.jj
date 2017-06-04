@@ -948,12 +948,14 @@ RecoverySet f =  new RecoverySet(COMMA).union(g);
             t = <float_constant> { if(l==null) l = new ListNode(new FloatConstNode(t)); else l.add(new FloatConstNode(t)); }
           | t = <string_constant> { if(l==null) l = new ListNode(new StringConstNode(t)); else l.add(new StringConstNode(t)); }
           | t = <char_constant>   { if(l==null) l = new ListNode(new CharConstNode(t)); else l.add(new CharConstNode(t)); }
+          | t = <null_constant>   { if(l==null) l = new ListNode(new NullConstNode(t)); else l.add(new NullConstNode(t)); }
           | e = expression(f)     { if(l==null) l = new ListNode(e); else l.add(e); }
          )
           (<COMMA> (
           t = <float_constant>  {l.add(new FloatConstNode(t)); }
         | t = <string_constant> {l.add(new StringConstNode(t)); }
         | t = <char_constant>   {l.add(new CharConstNode(t)); }
+        | t = <null_constant>   { if(l==null) l = new ListNode(new NullConstNode(t)); else l.add(new NullConstNode(t)); }
         | e = expression(f)     {l.add(e);}
                    )
          )*]

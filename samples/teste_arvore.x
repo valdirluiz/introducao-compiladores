@@ -6,6 +6,7 @@ class TesteArvore{
   double d;
 
   constructor(){
+    super('a', "a", 1, 2>2, false, true, .2, null);
     a = 1;
     b = "stringValue";
     c = 'a';
