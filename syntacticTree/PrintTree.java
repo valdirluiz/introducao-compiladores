@@ -438,13 +438,41 @@ public class PrintTree {
         printExpreNode(x.expr2);
     }
 
+    //----------------------------------- comando DoWhileNode-------------
+
+    public void numberDoWhileNode(DoWhileNode x) {
+        if (x == null) {
+            return;
+        }
+        x.number = kk++;
+        numberStatementNode(x.statement);
+        numberExpreListNode(x.expre);
+
+    }
+
+    public void printDoWhileNode(DoWhileNode x) {
+        if (x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": DoWhileNode ===> " + x.expre.number + " " +
+            x.statement.number;
+
+
+        printStatementNode(x.statement);
+        printExpreListNode(x.expre);
+
+    }
+
+
     // ---------------------------------- comando if --------------------
     public void numberIfNode(IfNode x) {
         if (x == null) {
             return;
         }
         x.number = kk++;
-        //TODO: falta fazer metodo para printar connectors
+
         numberExpreListNode(x.expr);
         numberStatementNode(x.stat1);
         numberStatementNode(x.stat2);
@@ -460,7 +488,6 @@ public class PrintTree {
             x.stat1.number + " " +
             ((x.stat2 == null) ? "null" : String.valueOf(x.stat2.number)));
 
-        //TODO: falta fazer metodo para printar connectors
         printExpreListNode(x.expr);
         printStatementNode(x.stat1);
         printStatementNode(x.stat2);
@@ -992,6 +1019,8 @@ public class PrintTree {
             printSuperNode((SuperNode) x);
         } else if (x instanceof BreakNode) {
             printBreakNode((BreakNode) x);
+        } else if (x instanceof DoWhileNode) {
+            printDoWhileNode((DoWhileNode) x);
         }
     }
 
@@ -1018,6 +1047,8 @@ public class PrintTree {
             numberSuperNode((SuperNode) x);
         } else if (x instanceof BreakNode) {
             numberBreakNode((BreakNode) x);
+        } else if (x instanceof DoWhileNode) {
+            numberDoWhileNode((DoWhileNode) x);
         }
     }
 }

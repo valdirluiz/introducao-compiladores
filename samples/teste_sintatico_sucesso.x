@@ -234,7 +234,7 @@ class Teste1 extends Teste{
   }
 
 
-  int metodoComWhile(){
+  int metodoComDoWhile(){
     do {
       print "Teste true\n";
     } (1>0);
@@ -249,7 +249,7 @@ class Teste1 extends Teste{
     return 0;
   }
 
-  int metodoComWhileString(){
+  int metodoComWhile(){
     do {
       print "Teste true\n";
     } (true || 1<2);
