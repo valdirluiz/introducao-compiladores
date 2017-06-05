@@ -972,21 +972,20 @@ WhileNode whilestat(RecoverySet g)  throws ParseEOFException :
   StatementNode s3 = null;
   ListNode l = null;
   Token co = null;
-  ListNode cl = null;
 }
 {
     try {
       t1 = <WHILE>
       <LPAREN>
       ( (e1 = expression(f1) { if(l==null) l = new ListNode(e1); else l.add(e1);} ) (
-      ( co = <AND> {if(cl==null) cl = new ListNode(new AndNode(co)); else cl.add(new AndNode(co));} | co = <OR> {if(cl==null) cl = new ListNode(new OrNode(co)); else cl.add(new OrNode(co));})
+      ( co = <AND> {l.add(new AndNode(co));} | co = <OR> {l.add(new OrNode(co));})
       e1 = expression(f1) {l.add(e1);} )* )
       <RPAREN>
         s3 = statement(g)
-      {return new WhileNode(t1, l, s3, cl);}
+      {return new WhileNode(t1, l, s3);}
     } catch (ParseException e) {
 		consumeUntil(g, e, "whilestat");
-    {return new WhileNode(t1, l, s3, cl);}
+    {return new WhileNode(t1, l, s3);}
 	}
 }
 

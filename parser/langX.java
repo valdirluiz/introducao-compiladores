@@ -1631,7 +1631,6 @@ l.add(e);
   StatementNode s3 = null;
   ListNode l = null;
   Token co = null;
-  ListNode cl = null;
       try {
         t1 = jj_consume_token(WHILE);
         jj_consume_token(LPAREN);
@@ -1652,12 +1651,12 @@ if(l==null) l = new ListNode(e1); else l.add(e1);
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
           case AND:{
             co = jj_consume_token(AND);
-if(cl==null) cl = new ListNode(new AndNode(co)); else cl.add(new AndNode(co));
+l.add(new AndNode(co));
             break;
             }
           case OR:{
             co = jj_consume_token(OR);
-if(cl==null) cl = new ListNode(new OrNode(co)); else cl.add(new OrNode(co));
+l.add(new OrNode(co));
             break;
             }
           default:
@@ -1670,10 +1669,10 @@ l.add(e1);
         }
         jj_consume_token(RPAREN);
         s3 = statement(g);
-{if ("" != null) return new WhileNode(t1, l, s3, cl);}
+{if ("" != null) return new WhileNode(t1, l, s3);}
       } catch (ParseException e) {
 consumeUntil(g, e, "whilestat");
-    {{if ("" != null) return new WhileNode(t1, l, s3, cl);}}
+    {{if ("" != null) return new WhileNode(t1, l, s3);}}
       }
     throw new Error("Missing return statement in function");
     } finally {

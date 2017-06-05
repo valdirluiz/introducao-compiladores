@@ -440,6 +440,34 @@ public class PrintTree {
 
     //----------------------------------- comando DoWhileNode-------------
 
+    public void numberWhileNode(WhileNode x) {
+        if (x == null) {
+            return;
+        }
+        x.number = kk++;
+        printExpreListNode(x.expressions);
+        printStatementNode(x.statement);
+
+    }
+
+    public void printWhileNode(WhileNode x) {
+        if (x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": WhileNode ===> " + x.expressions.number + " " +
+            x.statement.number);
+
+
+        printExpreListNode(x.expressions);
+        printStatementNode(x.statement);
+
+
+    }
+
+    //----------------------------------- comando DoWhileNode-------------
+
     public void numberDoWhileNode(DoWhileNode x) {
         if (x == null) {
             return;
@@ -457,7 +485,7 @@ public class PrintTree {
 
         System.out.println();
         System.out.print(x.number + ": DoWhileNode ===> " + x.expre.number + " " +
-            x.statement.number;
+            x.statement.number);
 
 
         printStatementNode(x.statement);
@@ -1021,6 +1049,8 @@ public class PrintTree {
             printBreakNode((BreakNode) x);
         } else if (x instanceof DoWhileNode) {
             printDoWhileNode((DoWhileNode) x);
+        } else if (x instanceof WhileNode) {
+            printWhileNode((WhileNode) x);
         }
     }
 
