@@ -443,10 +443,9 @@ public class PrintTree {
         if (x == null) {
             return;
         }
-
         x.number = kk++;
-        //TODO: alterar para lista de expressions
-        //numberExpreNode(x.expr);
+        //TODO: falta fazer metodo para printar connectors
+        numberExpreListNode(x.expr);
         numberStatementNode(x.stat1);
         numberStatementNode(x.stat2);
     }
@@ -461,8 +460,8 @@ public class PrintTree {
             x.stat1.number + " " +
             ((x.stat2 == null) ? "null" : String.valueOf(x.stat2.number)));
 
-        //TODO: alterar para lista de expressions
-        //printExpreNode(x.expr);
+        //TODO: falta fazer metodo para printar connectors
+        printExpreListNode(x.expr);
         printStatementNode(x.stat1);
         printStatementNode(x.stat2);
     }
@@ -738,6 +737,8 @@ public class PrintTree {
         x.number = kk++;
     }
 
+
+
     public void printNullConstNode(NullConstNode x) {
         if (x == null) {
             return;
@@ -745,6 +746,66 @@ public class PrintTree {
 
         System.out.println();
         System.out.print(x.number + ": NullConstNode ===> " + x.position.image);
+    }
+
+    //---------------------------------Connector OR ------------------
+
+    public void numberOrNode(OrNode x) {
+        if (x == null) {
+            return;
+        }
+
+        x.number = kk++;
+    }
+
+    public void printOrNode(OrNode x) {
+        if (x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": OrNode ===> " +
+            x.position.image);
+    }
+
+    //---------------------------------Connector AND ------------------
+
+    public void numberAndNode(AndNode x) {
+        if (x == null) {
+            return;
+        }
+
+        x.number = kk++;
+    }
+
+    public void printAndNode(AndNode x) {
+        if (x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": AndNode ===> " +
+            x.position.image);
+    }
+
+    //---------------------------------Constante Boolean ------------------
+
+    public void numberBooleanConstNode(BooleanConstNode x) {
+        if (x == null) {
+            return;
+        }
+
+        x.number = kk++;
+    }
+
+    public void printBooleanConstNode(BooleanConstNode x) {
+        if (x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": BooleanConstNode ===> " +
+            x.position.image);
     }
 
     // -------------------------------- Nome de variável ------------------
@@ -862,6 +923,12 @@ public class PrintTree {
             printDotNode((DotNode) x);
         } else if (x instanceof VarNode) {
             printVarNode((VarNode) x);
+        } else if (x instanceof BooleanConstNode) {
+            printBooleanConstNode((BooleanConstNode) x);
+        } else if (x instanceof AndNode) {
+            printAndNode((AndNode) x);
+        } else if (x instanceof OrNode) {
+            printOrNode((OrNode) x);
         }
     }
 
@@ -892,6 +959,12 @@ public class PrintTree {
             numberDotNode((DotNode) x);
         } else if (x instanceof VarNode) {
             numberVarNode((VarNode) x);
+        } else if (x instanceof BooleanConstNode) {
+            numberBooleanConstNode((BooleanConstNode) x);
+        } else if (x instanceof AndNode) {
+            numberAndNode((AndNode) x);
+        } else if (x instanceof OrNode) {
+            numberOrNode((OrNode) x);
         }
     }
 
