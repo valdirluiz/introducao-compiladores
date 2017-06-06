@@ -1741,16 +1741,18 @@ consumeUntil(g, e, "doWhileStat");
     trace_call("switchStat");
     try {RecoverySet f1 = new RecoverySet(RBRACE).union(g);
   Token t1 = null;
+  ListNode l1 = null;
+  SwitchCase c1 = null;
       try {
         t1 = jj_consume_token(SWITCH);
         jj_consume_token(LPAREN);
         jj_consume_token(IDENT);
         jj_consume_token(RPAREN);
         jj_consume_token(LBRACE);
-        switchCaseStat(g);
+        c1 = switchCaseStat(g);
+if(l1==null) l1 = new ListNode(l1); else l1.add(c1);
         label_19:
         while (true) {
-          switchCaseStat(f1);
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
           case CASE:
           case DEFAULT_CASE:{
@@ -1761,12 +1763,14 @@ consumeUntil(g, e, "doWhileStat");
             jj_la1[54] = jj_gen;
             break label_19;
           }
+          c1 = switchCaseStat(f1);
+l1.add(c1);
         }
         jj_consume_token(RBRACE);
-{if ("" != null) return new SwitchNode(t1);}
+{if ("" != null) return new SwitchNode(t1, l1);}
       } catch (ParseException e) {
 consumeUntil(g, e, "switchStat");
-      {{if ("" != null) return new SwitchNode(t1);}}
+      {{if ("" != null) return new SwitchNode(t1, l1);}}
       }
     throw new Error("Missing return statement in function");
     } finally {
@@ -1774,18 +1778,20 @@ consumeUntil(g, e, "switchStat");
     }
   }
 
-  final public void switchCaseStat(RecoverySet g) throws ParseException, ParseEOFException {
+  final public SwitchCase switchCaseStat(RecoverySet g) throws ParseException, ParseEOFException {
     trace_call("switchCaseStat");
-    try {
+    try {StatementNode s1 = null;
+  Token t1 = null;
+  ExpreNode e1 = null;
       try {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case CASE:{
-          jj_consume_token(CASE);
-          factor();
+          t1 = jj_consume_token(CASE);
+          e1 = factor();
           break;
           }
         case DEFAULT_CASE:{
-          jj_consume_token(DEFAULT_CASE);
+          t1 = jj_consume_token(DEFAULT_CASE);
           break;
           }
         default:
@@ -1796,7 +1802,7 @@ consumeUntil(g, e, "switchStat");
         jj_consume_token(COLON);
         label_20:
         while (true) {
-          statement(g);
+          s1 = statement(g);
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
           case BREAK:
           case FOR:
@@ -1824,9 +1830,12 @@ consumeUntil(g, e, "switchStat");
             break label_20;
           }
         }
+{if ("" != null) return new SwitchCase(t1, s1, e1);}
       } catch (ParseException e) {
 consumeUntil(g, e, "switchCaseStat");
+      {{if ("" != null) return new SwitchCase(t1, s1, e1);}}
       }
+    throw new Error("Missing return statement in function");
     } finally {
       trace_return("switchCaseStat");
     }
