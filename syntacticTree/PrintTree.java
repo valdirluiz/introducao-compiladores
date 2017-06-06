@@ -471,6 +471,7 @@ public class PrintTree {
 
         x.number = kk++;
         numberSwitchCaseNode((SwitchCase) x.node);
+        numberSwitchCaseListNode(x.next)
 
     }
 
