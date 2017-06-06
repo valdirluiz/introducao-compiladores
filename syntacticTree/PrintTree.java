@@ -438,6 +438,76 @@ public class PrintTree {
         printExpreNode(x.expr2);
     }
 
+    //----------------------- lista de SwitchCase ----------------
+
+    public void numberSwitchCaseNode(SwitchCase x){
+      if (x == null) {
+          return;
+      }
+      x.number = kk++;
+      numberExpreNode(x.expreNode);
+      numberStatementNode(x.statement);
+    }
+
+    public void printSwitchCaseNode(SwitchCase x){
+      if (x == null) {
+          return;
+      }
+      printExpreNode(x.expreNode);
+      printStatementNode(x.statement);
+    }
+
+    public void numberSwitchCaseListNode(ListNode x) {
+        if (x == null) {
+            return;
+        }
+
+        System.out.println();
+        String proximo = "null";
+        if(x.next!=null){
+          proximo = String.valueOf(x.next.number);
+        }
+        System.out.print(x.number + ": SwitchCase ===> " + proximo);
+
+        x.number = kk++;
+        numberSwitchCaseNode((SwitchCase) x.node);
+
+    }
+
+    public void printSwitchCaseListNode(ListNode x) {
+        if (x == null) {
+            return;
+        }
+
+        System.out.println();
+        System.out.print(x.number + ": ListNode (SwitchCase) ===> " +
+            x.node.number + " " +
+            ((x.next == null) ? "null" : String.valueOf(x.next.number)));
+        printSwitchCaseNode((SwitchCase) x.node);
+        printSwitchCaseListNode(x.next);
+    }
+
+
+    //------------------------------------comando Switch------------------
+    public void numberSwitchNode(SwitchNode x){
+      if (x == null) {
+          return;
+      }
+      x.number = kk++;
+      numberSwitchCaseListNode(x.l1);
+    }
+
+    public void printSwitchNode(SwitchNode x){
+      if (x == null) {
+          return;
+      }
+
+      System.out.println();
+      System.out.print(x.number + ": SwitchNode ===> " + x.l1.number);
+
+      printSwitchCaseListNode(x.l1);
+    }
+
     //----------------------------------- comando DoWhileNode-------------
 
     public void numberWhileNode(WhileNode x) {
@@ -445,8 +515,8 @@ public class PrintTree {
             return;
         }
         x.number = kk++;
-        printExpreListNode(x.expressions);
-        printStatementNode(x.statement);
+        numberExpreListNode(x.expressions);
+        numberStatementNode(x.statement);
 
     }
 
@@ -1051,6 +1121,8 @@ public class PrintTree {
             printDoWhileNode((DoWhileNode) x);
         } else if (x instanceof WhileNode) {
             printWhileNode((WhileNode) x);
+        } else if (x instanceof SwitchNode) {
+            printSwitchNode((SwitchNode) x);
         }
     }
 
@@ -1081,6 +1153,8 @@ public class PrintTree {
             numberDoWhileNode((DoWhileNode) x);
         } else if (x instanceof WhileNode) {
             numberWhileNode((WhileNode) x);
+        } else if (x instanceof SwitchNode) {
+            numberSwitchNode((SwitchNode) x);
         }
     }
 }
