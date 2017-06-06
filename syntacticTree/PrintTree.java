@@ -1079,6 +1079,8 @@ public class PrintTree {
             numberBreakNode((BreakNode) x);
         } else if (x instanceof DoWhileNode) {
             numberDoWhileNode((DoWhileNode) x);
+        } else if (x instanceof WhileNode) {
+            numberWhileNode((WhileNode) x);
         }
     }
 }
