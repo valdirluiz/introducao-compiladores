@@ -468,12 +468,7 @@ public class PrintTree {
             return;
         }
 
-        System.out.println();
-        String proximo = "null";
-        if(x.next!=null){
-          proximo = String.valueOf(x.next.number);
-        }
-        System.out.print(x.number + ": SwitchCase ===> " + proximo);
+        
 
         x.number = kk++;
         numberSwitchCaseNode((SwitchCase) x.node);
