@@ -1750,7 +1750,7 @@ consumeUntil(g, e, "doWhileStat");
         jj_consume_token(RPAREN);
         jj_consume_token(LBRACE);
         c1 = switchCaseStat(g);
-if(l1==null) l1 = new ListNode(l1); else l1.add(c1);
+if(l1==null) l1 = new ListNode(c1); else l1.add(c1);
         label_19:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {

@@ -453,6 +453,12 @@ public class PrintTree {
       if (x == null) {
           return;
       }
+
+      System.out.println();
+      System.out.print(x.number + ": SwitchCase ===> " +
+
+          ((x.expreNode == null) ? "null" : String.valueOf(x.expreNode.number)) +    " " + x.statement.number );
+
       printExpreNode(x.expreNode);
       printStatementNode(x.statement);
     }
@@ -471,7 +477,7 @@ public class PrintTree {
 
         x.number = kk++;
         numberSwitchCaseNode((SwitchCase) x.node);
-        numberSwitchCaseListNode(x.next)
+        numberSwitchCaseListNode(x.next);
 
     }
 
