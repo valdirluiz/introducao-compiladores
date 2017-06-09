@@ -1,6 +1,6 @@
 cd parser/
 rm -rf *.class && rm -f *.java
-/home/100000000491035/javacc-6.0/javacc-6.0/bin/javacc langX++.jj
+/home/valdir/install/javacc-6.0/javacc-6.0/bin/javacc langX++.jj
 cd ..
 javac parser/langX.java
 cd samples

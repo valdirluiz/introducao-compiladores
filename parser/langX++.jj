@@ -1020,15 +1020,16 @@ SwitchNode switchStat(RecoverySet g) throws ParseEOFException :
   Token t1 = null;
   ListNode l1 = null;
   SwitchCase c1 = null;
+  Token t2 = null;
 
 }
 {
     try {
-    t1 = <SWITCH> <LPAREN> <IDENT> <RPAREN> <LBRACE> c1 = switchCaseStat(g) {if(l1==null) l1 = new ListNode(c1); else l1.add(c1);} (c1  = switchCaseStat(f1) {l1.add(c1);})*  <RBRACE>
-    {return new SwitchNode(t1, l1);}
+    t1 = <SWITCH> <LPAREN> t2 = <IDENT> <RPAREN> <LBRACE> c1 = switchCaseStat(g) {if(l1==null) l1 = new ListNode(c1); else l1.add(c1);} (c1  = switchCaseStat(f1) {l1.add(c1);})*  <RBRACE>
+    {return new SwitchNode(t1, l1, t2);}
     } catch (ParseException e) {
 		  consumeUntil(g, e, "switchStat");
-      {return new SwitchNode(t1, l1);}
+      {return new SwitchNode(t1, l1, t2);}
     }
 }
 

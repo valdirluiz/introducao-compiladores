@@ -1743,10 +1743,11 @@ consumeUntil(g, e, "doWhileStat");
   Token t1 = null;
   ListNode l1 = null;
   SwitchCase c1 = null;
+  Token t2 = null;
       try {
         t1 = jj_consume_token(SWITCH);
         jj_consume_token(LPAREN);
-        jj_consume_token(IDENT);
+        t2 = jj_consume_token(IDENT);
         jj_consume_token(RPAREN);
         jj_consume_token(LBRACE);
         c1 = switchCaseStat(g);
@@ -1767,10 +1768,10 @@ if(l1==null) l1 = new ListNode(c1); else l1.add(c1);
 l1.add(c1);
         }
         jj_consume_token(RBRACE);
-{if ("" != null) return new SwitchNode(t1, l1);}
+{if ("" != null) return new SwitchNode(t1, l1, t2);}
       } catch (ParseException e) {
 consumeUntil(g, e, "switchStat");
-      {{if ("" != null) return new SwitchNode(t1, l1);}}
+      {{if ("" != null) return new SwitchNode(t1, l1, t2);}}
       }
     throw new Error("Missing return statement in function");
     } finally {

@@ -468,7 +468,7 @@ public class PrintTree {
             return;
         }
 
-        
+
 
         x.number = kk++;
         numberSwitchCaseNode((SwitchCase) x.node);
@@ -505,7 +505,7 @@ public class PrintTree {
       }
 
       System.out.println();
-      System.out.print(x.number + ": SwitchNode ===> " + x.l1.number);
+      System.out.print(x.number + ": SwitchNode ===> " + x.t2.image + " " +  x.l1.number );
 
       printSwitchCaseListNode(x.l1);
     }
