@@ -106,5 +106,35 @@ class Teste{
    return testeChar;
  }
 
+ //testes com if
+ int met14(){
+   if(1>2){
+     return 1;
+   } else{
+     return 0;
+   }
+ }
+
+ int met15(){
+   int m[][];
+   m = new int[1][2];
+   if(m[1][1] > 2){
+     return 0;
+   }
+   return 1;
+ }
+ 
+
+ int met16(){
+  boolean a;
+  boolean c;
+  a = true;
+
+   if(a && c){
+     return 1;
+   } else{
+     return 0;
+   }
+ }
 
 }
