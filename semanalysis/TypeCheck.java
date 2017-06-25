@@ -1,5 +1,6 @@
 package semanalysis;
 
+import parser.Token;
 import parser.langXConstants;
 import symtable.EntryClass;
 import symtable.EntryMethod;
@@ -43,6 +44,8 @@ import syntacticTree.ReturnNode;
 import syntacticTree.StatementNode;
 import syntacticTree.StringConstNode;
 import syntacticTree.SuperNode;
+import syntacticTree.SwitchCase;
+import syntacticTree.SwitchNode;
 import syntacticTree.UnaryNode;
 import syntacticTree.VarDeclNode;
 import syntacticTree.VarNode;
@@ -646,6 +649,65 @@ public class TypeCheck extends VarCheck {
 		return false;
 	}
 
+	private void TypeCheckSwitchNode(SwitchNode x) {
+		if (x == null) {
+			return;
+		}
+
+		this.validaDeclaracaoDaVariavel(x);
+		this.validaListaCases(x.t2, x.l1);
+
+	}
+
+	private void validaListaCases(Token tokenDaVariavel, ListNode cases) {
+		if (cases == null) {
+			return;
+		}
+		this.validaCaseNode((SwitchCase) cases.node, Curtable.varFind(tokenDaVariavel.image));
+		validaListaCases(tokenDaVariavel, cases.next);
+
+	}
+
+	private void validaCaseNode(SwitchCase node, EntryVar switchVar) {
+		if (node == null) {
+			return;
+		}
+
+		try {
+			if (node.expreNode != null) {
+				type typeCase = TypeCheckExpreNode(node.expreNode);
+				if (typeCase.ty != switchVar.type) {
+					throw new SemanticException(node.position, "Invalid case");
+				}
+			}
+		} catch (SemanticException e) {
+			System.out.println(e.getMessage());
+			foundSemanticError++;
+		}
+
+		try {
+			nesting++;
+			TypeCheckStatementNode(node.statement);
+			nesting--;
+		} catch (SemanticException e) {
+			System.out.println(e.getMessage());
+			foundSemanticError++;
+		}
+
+	}
+
+	private void validaDeclaracaoDaVariavel(SwitchNode x) {
+		EntryVar switchVar = Curtable.varFind(x.t2.image);
+		if (switchVar == null) {
+			try {
+				throw new SemanticException(x.t2.image + " variable not found");
+			} catch (SemanticException e) {
+				System.out.println(e.getMessage());
+				foundSemanticError++;
+			}
+		}
+	}
+
 	private void TypeCheckDoWhileNode(DoWhileNode x) {
 		if (x == null) {
 			return;
@@ -661,7 +723,9 @@ public class TypeCheck extends VarCheck {
 		}
 
 		try {
+			nesting++;
 			TypeCheckStatementNode(x.statement);
+			nesting--;
 		} catch (SemanticException e) {
 			System.out.println(e.getMessage());
 			foundSemanticError++;
@@ -684,7 +748,9 @@ public class TypeCheck extends VarCheck {
 		}
 
 		try {
+			nesting++;
 			TypeCheckStatementNode(x.statement);
+			nesting--;
 		} catch (SemanticException e) {
 			System.out.println(e.getMessage());
 			foundSemanticError++;
@@ -794,6 +860,10 @@ public class TypeCheck extends VarCheck {
 	public void TypeCheckBreakNode(BreakNode x) throws SemanticException {
 		if (x == null) {
 			return;
+		}
+
+		if (nesting <= 0) {
+			throw new SemanticException(x.position, "break in a invalid possition");
 		}
 
 	}
@@ -1313,6 +1383,8 @@ public class TypeCheck extends VarCheck {
 			TypeCheckWhileNode((WhileNode) x);
 		} else if (x instanceof DoWhileNode) {
 			TypeCheckDoWhileNode((DoWhileNode) x);
+		} else if (x instanceof SwitchNode) {
+			TypeCheckSwitchNode((SwitchNode) x);
 		}
 	}
 

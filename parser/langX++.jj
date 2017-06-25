@@ -141,8 +141,8 @@ Token tok;
 
    if (g == null) throw e; // se o conjunto � null, propaga a exce��o
 
-   tok = getToken(1); // pega token corrente
-   while ( ! eof )  // se n�o chegou ao fim do arquivo
+   tok = getToken(1);  
+   while ( ! eof )   
    {
         if ( g.contains(tok.kind ) ) //achou um token no conjunto
         {
@@ -153,7 +153,7 @@ Token tok;
         }
         if (debug_recovery)
              System.out.println("     Ignoring token: " + im(tok.kind));
-        getNextToken();     // pega pr�ximo token
+        getNextToken();      
         tok = getToken(1);
         if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?
             eof = true;

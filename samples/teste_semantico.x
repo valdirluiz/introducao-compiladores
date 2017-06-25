@@ -157,4 +157,16 @@ int met18(){
   return 0;
 }
 
+int met19(){
+    int a_1;
+    switch (a_1) {
+      case 1 :
+         return 1;
+      case 2 :
+        break;
+     default:
+        break;
+    }
+  }
+
 }
