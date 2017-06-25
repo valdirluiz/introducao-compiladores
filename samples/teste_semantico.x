@@ -137,4 +137,24 @@ class Teste{
    }
  }
 
+int met17(){
+  boolean a;
+  while (a){
+      print "Teste true\n";
+  }
+
+  while (true){
+    break;
+  }
+}
+
+
+int met18(){
+  boolean a;
+  do {
+    print "Teste true\n";
+  } (a);
+  return 0;
+}
+
 }

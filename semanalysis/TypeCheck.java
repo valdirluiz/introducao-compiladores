@@ -19,6 +19,7 @@ import syntacticTree.CharConstNode;
 import syntacticTree.ClassBodyNode;
 import syntacticTree.ClassDeclNode;
 import syntacticTree.ConstructDeclNode;
+import syntacticTree.DoWhileNode;
 import syntacticTree.DotNode;
 import syntacticTree.ExpreNode;
 import syntacticTree.FloatConstNode;
@@ -45,6 +46,7 @@ import syntacticTree.SuperNode;
 import syntacticTree.UnaryNode;
 import syntacticTree.VarDeclNode;
 import syntacticTree.VarNode;
+import syntacticTree.WhileNode;
 
 public class TypeCheck extends VarCheck {
 	int nesting; // controla o nivel de aninhamento em comandos repetitivos
@@ -644,6 +646,52 @@ public class TypeCheck extends VarCheck {
 		return false;
 	}
 
+	private void TypeCheckDoWhileNode(DoWhileNode x) {
+		if (x == null) {
+			return;
+		}
+
+		try {
+
+			validaExpresoesBooleanas(x.expre);
+
+		} catch (SemanticException e) {
+			System.out.println(e.getMessage());
+			foundSemanticError++;
+		}
+
+		try {
+			TypeCheckStatementNode(x.statement);
+		} catch (SemanticException e) {
+			System.out.println(e.getMessage());
+			foundSemanticError++;
+		}
+
+	}
+
+	private void TypeCheckWhileNode(WhileNode x) {
+		if (x == null) {
+			return;
+		}
+
+		try {
+
+			validaExpresoesBooleanas(x.expressions);
+
+		} catch (SemanticException e) {
+			System.out.println(e.getMessage());
+			foundSemanticError++;
+		}
+
+		try {
+			TypeCheckStatementNode(x.statement);
+		} catch (SemanticException e) {
+			System.out.println(e.getMessage());
+			foundSemanticError++;
+		}
+
+	}
+
 	// ---------------------------------- comando if --------------------
 	public void TypeCheckIfNode(IfNode x) {
 
@@ -653,7 +701,7 @@ public class TypeCheck extends VarCheck {
 
 		try {
 
-			validaExpresoesIf(x.expr);
+			validaExpresoesBooleanas(x.expr);
 
 		} catch (SemanticException e) {
 			System.out.println(e.getMessage());
@@ -675,7 +723,7 @@ public class TypeCheck extends VarCheck {
 		}
 	}
 
-	private void validaExpresoesIf(ListNode x) throws SemanticException {
+	private void validaExpresoesBooleanas(ListNode x) throws SemanticException {
 		type t;
 
 		if (!(x.node instanceof AndNode) && !(x.node instanceof OrNode)) {
@@ -689,7 +737,7 @@ public class TypeCheck extends VarCheck {
 		if (x.next == null) {
 			return;
 		} else {
-			validaExpresoesIf(x.next);
+			validaExpresoesBooleanas(x.next);
 		}
 
 	}
@@ -748,10 +796,6 @@ public class TypeCheck extends VarCheck {
 			return;
 		}
 
-		// verifica se est� dentro de um for. Se n�o, ERRO
-		if (nesting <= 0) {
-			throw new SemanticException(x.position, "break not in a for statement");
-		}
 	}
 
 	// --------------------------- Comando vazio -------------------
@@ -1265,6 +1309,11 @@ public class TypeCheck extends VarCheck {
 			TypeCheckSuperNode((SuperNode) x);
 		} else if (x instanceof BreakNode) {
 			TypeCheckBreakNode((BreakNode) x);
+		} else if (x instanceof WhileNode) {
+			TypeCheckWhileNode((WhileNode) x);
+		} else if (x instanceof DoWhileNode) {
+			TypeCheckDoWhileNode((DoWhileNode) x);
 		}
 	}
+
 }
