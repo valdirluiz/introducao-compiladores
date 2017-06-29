@@ -6,7 +6,7 @@ javac parser/langX.java
 cd samples
 rm -rf *.log
 cd ..
-java parser.langX -debug_AS -debug_recovery -print_tree samples/teste_semantico.x
+java parser.langX -debug_AS -debug_recovery -print_tree samples/erros_fase2.x
 #java parser.langX -debug_AS -debug_recovery -print_tree samples/exemplo_if.x
 #java parser.langX -debug_AS -debug_recovery -print_tree samples/exemplo_switch.x > samples/exemplo_switch.log
 #java parser.langX -debug_AS -debug_recovery -print_tree samples/teste_arvore.x > samples/teste_arvore.log

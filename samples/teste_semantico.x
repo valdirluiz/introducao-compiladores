@@ -2,8 +2,8 @@ class Teste{
 
     //testa classe alinhada
     class data{
-      //classe alinhada da classe alinhada
-      class TesteClass{
+      //classe alinhada da classe alinhada e extends
+      class TesteClass extends data{
 
       }
       int dia;
@@ -39,20 +39,25 @@ class Teste{
     int met1(){
       return 1;
     }
+
+    //testa retorno de string
     string met2(){
       return "teste";
     }
 
+    //teste retorno de objeto
     data met3(){
       data d1;
       d1 = new data();
       return d1;
     }
 
+    //testa retorno char
     char met4(){
       return 'a';
     }
 
+    //testa retorno boolean constant
     boolean met5(){
       return true;
     }
@@ -63,6 +68,7 @@ class Teste{
       return teste;
     }
 
+    //testa retorno double
     double met7(){
       return .3;
     }
@@ -115,6 +121,7 @@ class Teste{
      }
    }
 
+   //testa operacao com matriz
    int met15(){
      int m[][];
      m = new int[1][2];
@@ -124,7 +131,7 @@ class Teste{
      return 1;
    }
    
-
+   //testa if
    int met16(){
     boolean a;
     boolean c;
@@ -137,6 +144,7 @@ class Teste{
      }
    }
 
+   //teste while
   int met17(){
     boolean a;
     while (a){
@@ -148,7 +156,7 @@ class Teste{
     }
   }
 
-
+  //testa do while
   int met18(){
     boolean a;
     do {
@@ -157,6 +165,7 @@ class Teste{
     return 0;
   }
 
+  //teste switch 
   int met19(){
       int a_1;
       switch (a_1) {
@@ -169,6 +178,7 @@ class Teste{
       }
   }
 
+  //teste for
   int met20(){
     int i;
     for (i = 0; i < 10; i = i + 1){
