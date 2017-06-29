@@ -1,13 +1,12 @@
 package symtable;
 
 
-// lista de EntryClass, usada para representar os tipos de uma lista
-// de parâmetros
+
 public class EntryRec extends EntryTable {
-    public EntryTable type; // tipo de um objeto
-    public int dim; // dimensão
-    public EntryRec next; // apontador para o resto da lista
-    public int cont; // número de elementos a partir daquele elemento
+    public EntryTable type;
+    public int dim;
+    public EntryRec next;
+    public int cont;
 
     // cria elemento
     public EntryRec(EntryTable p, int d, int c) {
@@ -17,7 +16,7 @@ public class EntryRec extends EntryTable {
         next = null;
     }
 
-    // cria elemento e põe no início da lista
+
     public EntryRec(EntryTable p, int d, int c, EntryRec t) {
         type = p;
         cont = c;
@@ -25,7 +24,7 @@ public class EntryRec extends EntryTable {
         next = t;
     }
 
-    // inverte a lista de EntryRec
+
     public EntryRec inverte(EntryRec ant) {
         EntryRec r = this;
 
@@ -53,7 +52,7 @@ public class EntryRec extends EntryTable {
         return r;
     }
 
-    // devolve a representação da EntryRec na forma de string
+
     public String toStr() {
         String s;
 
@@ -69,7 +68,7 @@ public class EntryRec extends EntryTable {
         return s;
     }
 
-    // devolve descritor da EntryRec
+
     public String dscJava() {
         String s;
 
@@ -83,7 +82,7 @@ public class EntryRec extends EntryTable {
         return s;
     }
 
-    // verifica a igualdade de dois objetos do tipo EntryRec
+     
     public boolean equals(EntryRec x) {
         EntryRec p;
         EntryRec q;

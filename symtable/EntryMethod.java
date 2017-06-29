@@ -1,17 +1,16 @@
 package symtable;
 
-
-// corresponde a uma declaracão de método na tabela de símbolos
+ 
 public class EntryMethod extends EntryTable {
-    public EntryTable type; // tipo de retorno do método
-    public int dim; // número de dimensões do retorno
-    public EntryRec param; // tipo dos parâmetros
-    public int totallocals; // número de variáveis locais
-    public int totalstack; // tamanho da pilha necessária
-    public boolean fake; // true se é um falso construtor
-    public boolean hassuper; // true se método possui chamada super
+    public EntryTable type;
+    public int dim;
+    public EntryRec param;
+    public int totallocals;
+    public int totalstack;
+    public boolean fake;
+    public boolean hassuper;
 
-    // cria elemento para inserir na tabela 
+    // cria elemento para inserir na tabela
     public EntryMethod(String n, EntryTable p, int d, EntryRec r) {
         name = n;
         type = p;

@@ -5,7 +5,7 @@ import symtable.*;
 
 public class type {
     public EntryTable ty; // entrada na tabela do tipo
-    public int dim; // dimensão
+    public int dim; 
 
     public type(EntryTable t, int d) {
         ty = t;
